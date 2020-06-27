@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Project</string>
+    <string name="startButton">START</string>
+    <string name="scoreButton">SCORES</string>
+    <string name="optionButton">OPTIONS</string>
+    <string name="helpButton">HELP</string>
+    <string name="fruitButton">FRUITS</string>
+    <string name="vegeButton">VEGES</string>
+    <string name="setButton">SET</string>
 </resources>
