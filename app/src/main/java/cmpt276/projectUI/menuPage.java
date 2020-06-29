@@ -1,13 +1,17 @@
 package cmpt276.projectUI;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+
+import java.util.Objects;
 
 import cmpt276.project.R;
 
@@ -20,26 +24,28 @@ import cmpt276.project.R;
 
 public class menuPage extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_page);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
 
         setButtons();
     }
 
     private void setButtons() {
-        Animation blink = AnimationUtils.loadAnimation(menuPage.this, R.anim.blink);
+        Animation bounce = AnimationUtils.loadAnimation(menuPage.this, R.anim.bounce);
 
         Button startButton = findViewById(R.id.startButton);
         Button scoreButton = findViewById(R.id.scoreButton);
         Button optionButton = findViewById(R.id.optionButton);
         Button helpButton = findViewById(R.id.helpButton);
 
-        startButton.startAnimation(blink);
-        scoreButton.startAnimation(blink);
-        optionButton.startAnimation(blink);
-        helpButton.startAnimation(blink);
+        startButton.startAnimation(bounce);
+        scoreButton.startAnimation(bounce);
+        optionButton.startAnimation(bounce);
+        helpButton.startAnimation(bounce);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
