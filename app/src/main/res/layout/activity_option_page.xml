@@ -6,4 +6,46 @@
     android:layout_height="match_parent"
     tools:context="cmpt276.projectUI.optionPage">
 
+    <RadioGroup
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/fruitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fruitButton"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            tools:targetApi="jelly_bean" />
+
+        <RadioButton
+            android:id="@+id/vegeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vegeButton"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            tools:targetApi="jelly_bean"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/setButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/setButton"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        tools:targetApi="jelly_bean"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/options" />
 </androidx.constraintlayout.widget.ConstraintLayout>
