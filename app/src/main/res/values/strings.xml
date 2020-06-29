@@ -1,5 +1,4 @@
 <resources>
-    <<<<<<< app/src/main/res/values/strings.xml
     <string name="app_name">Project</string>
     <string name="startButton">START</string>
     <string name="scoreButton">SCORES</string>
