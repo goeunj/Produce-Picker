@@ -8,28 +8,28 @@ import java.util.Random;
 
 public class GameLogic {
 
-    private Random r = new Random();
+    private static Random r = new Random();
 
     public GameLogic() {
     }
 
-    public int isThereAMatch(int selection, int[] discardArray){        //param1 = button selected; param2 = buttons on discard card
+    public static boolean isThereAMatch(int selection, int[] discardArray){        //param1 = button selected; param2 = buttons on discard card
 
         for (int value : discardArray) {
             if (selection == value) {
-                return 1;                                          //there is a match
+                return true;                                          //there is a match
             }
         }
-        return 0;               //no match
+        return false;               //no match
     }
 
-    private int getRandom(int[] array){              //helper method for nextCard()
+    private static int getRandom(int[] array){              //helper method for nextCard()
 
         int index = r.nextInt(array.length);
         return array[index];
     }
 
-    public int nextCard(int[] cardStillInDeck){             //pick a random index of a card //param = the 7 index array representing each card
+    public static int nextCard(int[] cardStillInDeck){             //pick a random index of a card //param = the 7 index array representing each card
 
         int drawCard = getRandom(cardStillInDeck);
         while(drawCard == 73){                            //if index has already been picked
@@ -40,7 +40,7 @@ public class GameLogic {
         return drawCard;
     }
 
-    public int[] getCard(int cardNum){            //get card based off a random selection from nextCard
+    public static int[] getCard(int cardNum){            //get card based off a random selection from nextCard
 
         int[] card;
         switch(cardNum){

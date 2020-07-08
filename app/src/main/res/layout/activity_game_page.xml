@@ -7,14 +7,27 @@
     tools:context="cmpt276.projectUI.gamePage">
 
     <TableLayout
-        android:id="@+id/tblCard"
+        android:id="@+id/tblDraw"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tblDiscard"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <TableLayout
+        android:id="@+id/tblDiscard"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:stretchColumns="*"
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
-        android:layout_marginTop="312dp"
-        android:stretchColumns="*"
+        android:layout_marginTop="220dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
