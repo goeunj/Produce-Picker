@@ -25,9 +25,7 @@ import android.widget.TableRow;
 import cmpt276.project.R;
 
 public class gamePage extends AppCompatActivity {
-
-
-
+    int[] foods = {1,4,6};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +42,6 @@ public class gamePage extends AppCompatActivity {
         //win screen
 
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateCard() {
         TableLayout table = findViewById(R.id.tblCard);
         TableRow tableRow = new TableRow(this);
@@ -61,15 +57,53 @@ public class gamePage extends AppCompatActivity {
                     TableRow.LayoutParams.MATCH_PARENT,
                     1.0f));
             button.setPadding(0, 0, 0, 0);
-            button.setBackgroundResource(R.drawable.banana);
-//            int newWidth = button.getWidth();
-//            int newHeight = button.getHeight();
-//            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.banana);
-//            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-//            Resources resource = getResources();
-//            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            int newWidth = 100;
+            int newHeight = 100;
 
+            if (foods[i] == 0){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 1){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.banana);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 2){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cherry);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 3){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.orange);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 4){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.peach);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 5){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.strawberry);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
+            if (foods[i] == 6){
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.watermelon);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+                Resources resource = getResources();
+                button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            }
             tableRow.addView(button);
         }
     }
+
 }
