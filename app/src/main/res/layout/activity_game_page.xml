@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context="cmpt276.projectUI.gamePage">
 
+    <TableLayout
+        android:id="@+id/tblCard"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="312dp"
+        android:stretchColumns="*"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
