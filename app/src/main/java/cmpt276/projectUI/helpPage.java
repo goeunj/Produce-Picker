@@ -1,3 +1,7 @@
+/*
+Displays the rules of the game and describes how to play
+*/
+
 package cmpt276.projectUI;
 
 import androidx.appcompat.app.AppCompatActivity;
