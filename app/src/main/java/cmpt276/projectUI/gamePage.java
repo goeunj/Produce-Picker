@@ -25,13 +25,17 @@ public class gamePage extends AppCompatActivity {
     int[] myCard;
     int[] discard;
     int[] cards = {0,1,2,3,4,5,6};
+    String[] Fruit = {"apple", "banana", "cherry", "orange", "peach", "strawberry", "watermelon"};
+    String[] Veg = {"broccoli", "carrot", "lettuce", "mushroom", "onion", "pepper", "potato"};
+    String[] Chosen;
     int count = 0;
-
+    //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
         cards = new int[]{0, 1, 2, 3, 4, 5, 6};
+        Chosen = Veg;
         count = 0;
         drawCard(cards);
         populateCard("Discard");
@@ -41,16 +45,6 @@ public class gamePage extends AppCompatActivity {
         for (int element: cards){
             System.out.println(element);
         }
-
-        //Create card to be first on discard pile
-        //create card to be on top of draw pile
-        //flip top card
-        //user finds match
-        //move card to discard pile
-        //create new card
-        //ect
-        //win screen
-
     }
 
     private void drawCard(int[] cards){
@@ -82,40 +76,17 @@ public class gamePage extends AppCompatActivity {
                     TableRow.LayoutParams.MATCH_PARENT,
                     1.0f));
             button.setPadding(0, 0, 0, 0);
-            final int newWidth = 100;
-            int newHeight = 100;
-            Bitmap originalBitmap = null;
-            if (myCard[i] == 0){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
-            }
-            if (myCard[i] == 1){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.banana);
-            }
-            if (myCard[i] == 2){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cherry);
-            }
-            if (myCard[i] == 3){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.orange);
-            }
-            if (myCard[i] == 4){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.peach);
-            }
-            if (myCard[i] == 5){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.strawberry);
-            }
-            if (myCard[i] == 6){
-                originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.watermelon);
-            }
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            int imgID = getResources().getIdentifier(Chosen[myCard[i]], "drawable", getPackageName());
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-            button.setText("" + myCard[i]);
-            button.setTextColor(Color.alpha(0));
+            button.setTag(myCard[i]);
 
             button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    int num = parseInt((String) button.getText());
+                    int num = (int) button.getTag();
                     buttonClicked(num);
                 }
             });
