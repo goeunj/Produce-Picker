@@ -10,23 +10,79 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cmpt276.projectUI.splashScreen">
+        <activity
+            android:name="cmpt276.projectUI.splashScreen"
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cmpt276.projectUI.menuPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="cmpt276.projectUI.menuPage">
         </activity>
-        <activity android:name="cmpt276.projectUI.gamePage" />
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="cmpt276.projectUI.gamePage"
+            tools:targetApi="jelly_bean"
+            android:parentActivityName="cmpt276.projectUI.menuPage">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpt276.projectUI.menuPage"/>
+            <meta-data
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts"/>
+
+        </activity>
+
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="cmpt276.projectUI.optionPage"
+            tools:targetApi="jelly_bean"
+            android:parentActivityName="cmpt276.projectUI.menuPage">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpt276.projectUI.menuPage"/>
+        </activity>
+
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="cmpt276.projectUI.scorePage"
+            tools:targetApi="jelly_bean"
+            android:parentActivityName="cmpt276.projectUI.menuPage">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpt276.projectUI.menuPage"/>
+        </activity>
+
+        <activity
+            tools:ignore="LockedOrientationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="cmpt276.projectUI.helpPage"
+            tools:targetApi="jelly_bean"
+            android:parentActivityName="cmpt276.projectUI.menuPage">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cmpt276.projectUI.menuPage"/>
+        </activity>
     </application>
 </manifest>

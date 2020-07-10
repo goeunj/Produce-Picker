@@ -4,48 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cmpt276.projectUI.optionPage">
+    tools:context="cmpt276.projectUI.optionPage"
+    android:background="@drawable/background1">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        android:background="#80CBC4"
+        tools:ignore="ContentDescription,PrivateResource"/>
 
     <RadioGroup
         android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/fruitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fruitButton"
-            android:fontFamily="casual"
-            android:textStyle="bold"
-            tools:targetApi="jelly_bean" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.367">
 
         <RadioButton
             android:id="@+id/vegeButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:shadowColor="#1565C0"
+            android:shadowRadius="25"
             android:text="@string/vegeButton"
-            android:fontFamily="casual"
+            android:textSize="36sp"
             android:textStyle="bold"
-            tools:targetApi="jelly_bean"/>
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/fruitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowColor="#7E57C2"
+            android:shadowRadius="25"
+            android:text="@string/fruitButton"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
     </RadioGroup>
 
     <Button
         android:id="@+id/setButton"
+        style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="44dp"
+        android:shadowColor="#FFAB91"
+        android:shadowRadius="25"
         android:text="@string/setButton"
-        android:fontFamily="casual"
+        android:textSize="30sp"
         android:textStyle="bold"
-        tools:targetApi="jelly_bean"
+        app:fontFamily="@font/chicle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/options" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

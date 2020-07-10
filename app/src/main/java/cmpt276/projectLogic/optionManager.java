@@ -4,6 +4,7 @@ import android.widget.RadioButton;
 import cmpt276.project.R;
 
 /**
+ * default option is fruits
  * sets user option to radio button clicked
  * gets user choice when needed
  */
@@ -13,7 +14,7 @@ public class optionManager {
     private static optionManager chosenOption;
 
     private optionManager(){
-        myOption = "";
+        myOption = "FRUITS";
     }
 
     public static optionManager getInstance(){

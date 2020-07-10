@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context="cmpt276.projectUI.scorePage">
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="41dp"
+        android:layout_height="34dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        android:background="#80CBC4"
+        tools:ignore="ContentDescription,PrivateResource"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
