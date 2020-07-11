@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="@drawable/background"
     tools:context="cmpt276.projectUI.helpPage">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="271dp"
         android:layout_height="383dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
         android:layout_marginTop="52dp"
         android:text="@string/rules"
-        app:fontFamily="@font/chicle"
+        android:textColor="#1B5E20"
         android:textSize="20sp"
-        android:textColor="#D0000000"
+        app:fontFamily="@font/chicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -28,10 +28,10 @@
         android:layout_marginStart="152dp"
         android:layout_marginLeft="152dp"
         android:layout_marginTop="92dp"
-        android:shadowColor="#B39DDB"
+        android:shadowColor="#80CBC4"
         android:shadowRadius="20"
         android:text="@string/rules_title"
-        android:textColor="#D0000000"
+        android:textColor="#1B5E20"
         android:textSize="36sp"
         app:fontFamily="@font/chicle"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,10 +41,10 @@
         android:id="@+id/backButton"
         android:layout_width="41dp"
         android:layout_height="34dp"
+        android:background="#80CBC4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/abc_vector_test"
-        android:background="#80CBC4"
-        tools:ignore="ContentDescription,PrivateResource"/>
+        tools:ignore="ContentDescription,PrivateResource" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,12 @@ import cmpt276.projectLogic.optionManager;
 import static android.widget.Toast.LENGTH_SHORT;
 
 /**
+ * populate correct cards according to user option
+ * on click, if match = move card to discard pile
+ * game ends when all user cards are on discard pile
  *
+ * when time/score < 5th score on score list, shows win message
+ * when time/score > 5th score on score list, shows lose message
  */
 
 public class gamePage extends AppCompatActivity {
@@ -40,21 +45,24 @@ public class gamePage extends AppCompatActivity {
     String[] Fruit = {"apple", "banana", "cherry", "orange", "peach", "strawberry", "watermelon"};
     String[] Veg = {"broccoli", "carrot", "lettuce", "mushroom", "onion", "pepper", "potato"};
     String[] Chosen;
-    int count = 0;
+    int count;
     //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
-        getUserOption();
+
         cards = new int[]{0, 1, 2, 3, 4, 5, 6};
         count = 0;
+        discard = myCard;
+
+        getUserOption();
         drawCard(cards);
         populateCard("Discard");
-        discard = myCard;
         drawCard(cards);
         populateCard("Draw");
+
         for (int element: cards){
             System.out.println(element);
         }
@@ -76,15 +84,18 @@ public class gamePage extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateCard(String position) {
         TableLayout table = null;
+
         if (position.equals("Discard")){
             table = findViewById(R.id.tblDiscard);
         }
         else if (position.equals("Draw")) {
             table = findViewById(R.id.tblDraw);
         }
+
         if (table != null) {
             table.removeAllViews();
         }
+
         TableRow tableRow = new TableRow(this);
         tableRow.setLayoutParams(new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
@@ -92,13 +103,16 @@ public class gamePage extends AppCompatActivity {
                 1.0f));
         assert table != null;
         table.addView(tableRow);
+
         for (int i = 0; i < 3; i++) {
             final Button button = new Button(this);
+
             button.setLayoutParams(new TableRow.LayoutParams(
                     TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.MATCH_PARENT,
                     1.0f));
             button.setPadding(0, 0, 0, 0);
+
             int imgID = getResources().getIdentifier(Chosen[myCard[i]], "drawable", getPackageName());
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
@@ -115,7 +129,6 @@ public class gamePage extends AppCompatActivity {
             });
 
             tableRow.addView(button);
-
         }
     }
 
@@ -123,46 +136,32 @@ public class gamePage extends AppCompatActivity {
     private void buttonClicked(int num) {
         if (GameLogic.isThereAMatch(num, discard)){
             count++;
+
             if (count == 6){
                 Toast.makeText(getApplicationContext(), "YOU WIN!", Toast.LENGTH_LONG).show();
-                setWinMessage();
+                setMessage();
                 return;
             }
+
             Toast.makeText(getApplicationContext(), "MATCH!", LENGTH_SHORT).show();
             populateCard("Discard");
             discard = myCard;
             drawCard(cards);
             populateCard("Draw");
-
         }
         else{
             Toast.makeText(getApplicationContext(), "No Match", LENGTH_SHORT).show();
         }
     }
 
-    private void setLoseMessage(){
-        final TextView loseMessage = findViewById(R.id.winMessage);
-        Button backButton = findViewById(R.id.backToMenu);
-
-        loseMessage.setText(R.string.loseMessage);
-        loseMessage.setVisibility(View.VISIBLE);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loseMessage.setVisibility(View.INVISIBLE);
-                startActivity(new Intent(gamePage.this, menuPage.class));
-            }
-        });
-    }
-
-    private void setWinMessage(){
+    private void setMessage(){
 //        adapter = new CustomAdapter(manager.getMyScore(), getApplicationContext(), manager);
         String date = new SimpleDateFormat("MM.dd.yyyy", Locale.getDefault()).format(new Date());
 
         final EditText nickname = findViewById(R.id.nickname);
         final Button addButton = findViewById(R.id.addButton);
         final Button cancelButton = findViewById(R.id.cancelButton);
+        final Button backButton = findViewById(R.id.backToMenu);
         final TextView winMessage = findViewById(R.id.winMessage);
 
         TableLayout discardPile = findViewById(R.id.tblDiscard);
@@ -170,6 +169,8 @@ public class gamePage extends AppCompatActivity {
 
         discardPile.setVisibility(View.INVISIBLE);
         userPile.setVisibility(View.INVISIBLE);
+
+        //if time < 5th score on score page
         nickname.setVisibility(View.VISIBLE);
         addButton.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.VISIBLE);
@@ -177,7 +178,22 @@ public class gamePage extends AppCompatActivity {
 
         setAddButton(addButton, cancelButton, nickname, winMessage, date);
         setCancelButton(cancelButton, addButton, nickname, winMessage);
+        //else
+        winMessage.setText(R.string.loseMessage);
+        winMessage.setVisibility(View.VISIBLE);
+        backButton.setVisibility(View.VISIBLE);
+        setBackToMenuButton(winMessage, backButton);
+    }
 
+    public void setBackToMenuButton(final TextView winMessage, final Button backButton){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                winMessage.setVisibility(View.INVISIBLE);
+                backButton.setVisibility(View.INVISIBLE);
+                startActivity(new Intent(gamePage.this, menuPage.class));
+            }
+        });
     }
 
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){

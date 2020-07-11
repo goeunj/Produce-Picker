@@ -7,7 +7,7 @@
     <string name="optionButton">OPTIONS</string>
     <string name="helpButton">HELP</string>
     <string name="fruitButton">FRUITS</string>
-    <string name="vegeButton">VEGES</string>
+    <string name="vegeButton">VEGGIES</string>
     <string name="optionMessage">OPTION MUST BE SELECTED TO SET</string>
     <string name="setButton">SET</string>
     <string name="rules_title">Rules</string>

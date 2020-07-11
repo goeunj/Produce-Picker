@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="cmpt276.projectUI.gamePage">
 
     <TableLayout
@@ -23,20 +24,20 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:stretchColumns="*"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </TableLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.261" />
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#B39DDB"
+        android:background="#FCE4EC"
         android:text="@string/addScore"
-        android:textColor="#D0000000"
+        android:textColor="#1B5E20"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -72,10 +73,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:shadowColor="#1B5E20"
+        android:shadowColor="#80CBC4"
         android:shadowRadius="25"
         android:text="@string/winMessage"
-        android:textColor="#D0000000"
+        android:textColor="#1B5E20"
         android:textSize="36sp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -88,8 +89,9 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
+        android:background="#E1F5FE"
         android:text="@string/cancelScore"
+        android:textColor="#1B5E20"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -101,13 +103,18 @@
         android:id="@+id/backToMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
+        android:background="#FFFDE7"
         android:text="@string/backToMenu"
+        android:textColor="#1B5E20"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:fontFamily="@font/chicle"
-        app:layout_constraintBottom_toBottomOf="@+id/addButton"
-        app:layout_constraintStart_toEndOf="@+id/winMessage" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winMessage"
+        app:layout_constraintVertical_bias="0.062" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

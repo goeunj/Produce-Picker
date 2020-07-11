@@ -1,7 +1,6 @@
 package cmpt276.projectUI;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,12 +8,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import cmpt276.project.R;
+
+/**
+ * shows title of game
+ * shows the names of team members
+ */
 
 public class splashScreen extends AppCompatActivity {
 
@@ -32,22 +33,18 @@ public class splashScreen extends AppCompatActivity {
             }
         });
 
-
         TextView authorView = findViewById(R.id.txtAuthors);
         Animation authorAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.author_anim);
         TextView titleView = findViewById(R.id.txtTitle);
         Animation titleAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.title_anim);
 
-
         titleView.setAnimation(titleAnim);
         authorView.setAnimation(authorAnim);
-
 
         authorAnim.setAnimationListener(new Animation.AnimationListener() {
 
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
@@ -63,7 +60,6 @@ public class splashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
     }

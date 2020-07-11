@@ -4,37 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cmpt276.projectUI.optionPage"
-    android:background="@drawable/background1">
+    android:background="@drawable/background"
+    tools:context="cmpt276.projectUI.optionPage">
 
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="41dp"
         android:layout_height="34dp"
+        android:background="#80CBC4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/abc_vector_test"
-        android:background="#80CBC4"
-        tools:ignore="ContentDescription,PrivateResource"/>
+        tools:ignore="ContentDescription,PrivateResource" />
 
     <RadioGroup
         android:id="@+id/options"
-        android:layout_width="120dp"
-        android:layout_height="104dp"
+        android:layout_width="136dp"
+        android:layout_height="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367">
+        app:layout_constraintVertical_bias="0.423">
 
         <RadioButton
             android:id="@+id/vegeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:shadowColor="#1565C0"
-            android:shadowRadius="25"
+            android:background="#E1F5FE"
             android:text="@string/vegeButton"
+            android:textColor="#1B5E20"
             android:textSize="36sp"
             android:textStyle="bold"
             app:fontFamily="@font/chicle" />
@@ -43,9 +42,9 @@
             android:id="@+id/fruitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:shadowColor="#7E57C2"
-            android:shadowRadius="25"
+            android:background="#FCE4EC"
             android:text="@string/fruitButton"
+            android:textColor="#1B5E20"
             android:textSize="36sp"
             android:textStyle="bold"
             app:fontFamily="@font/chicle" />
@@ -56,10 +55,10 @@
         style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:shadowColor="#FFAB91"
-        android:shadowRadius="25"
+        android:layout_marginTop="24dp"
+        android:background="#FFFDE7"
         android:text="@string/setButton"
+        android:textColor="#1B5E20"
         android:textSize="30sp"
         android:textStyle="bold"
         app:fontFamily="@font/chicle"

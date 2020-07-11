@@ -11,8 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import java.util.Objects;
-
 import cmpt276.project.R;
 
 /**
