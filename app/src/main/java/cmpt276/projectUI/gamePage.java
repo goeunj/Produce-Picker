@@ -10,8 +10,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -25,6 +27,7 @@ import java.util.Locale;
 import cmpt276.projectLogic.GameLogic;
 import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
+import cmpt276.projectLogic.scoreManager;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -38,14 +41,19 @@ import static android.widget.Toast.LENGTH_SHORT;
  */
 
 public class gamePage extends AppCompatActivity {
+    private scoreManager scoreList = scoreManager.getInstance();
     private optionManager option = optionManager.getInstance();
+    Chronometer time;
+
+    int score;
     int[] myCard;
     int[] discard;
     int[] cards = {0,1,2,3,4,5,6};
     String[] Fruit = {"apple", "banana", "cherry", "orange", "peach", "strawberry", "watermelon"};
     String[] Veg = {"broccoli", "carrot", "lettuce", "mushroom", "onion", "pepper", "potato"};
     String[] Chosen;
-    int count;
+    int count = 0;
+
     //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -55,11 +63,14 @@ public class gamePage extends AppCompatActivity {
 
         cards = new int[]{0, 1, 2, 3, 4, 5, 6};
         count = 0;
-        discard = myCard;
 
+        time = findViewById(R.id.time);
         getUserOption();
+
         drawCard(cards);
         populateCard("Discard");
+        discard = myCard;
+
         drawCard(cards);
         populateCard("Draw");
 
@@ -123,6 +134,7 @@ public class gamePage extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
+                    time.start();
                     int num = (int) button.getTag();
                     buttonClicked(num);
                 }
@@ -138,7 +150,7 @@ public class gamePage extends AppCompatActivity {
             count++;
 
             if (count == 6){
-                Toast.makeText(getApplicationContext(), "YOU WIN!", Toast.LENGTH_LONG).show();
+                time.stop();
                 setMessage();
                 return;
             }
@@ -155,8 +167,9 @@ public class gamePage extends AppCompatActivity {
     }
 
     private void setMessage(){
-//        adapter = new CustomAdapter(manager.getMyScore(), getApplicationContext(), manager);
+        score = (int)(SystemClock.elapsedRealtime() - time.getBase());
         String date = new SimpleDateFormat("MM.dd.yyyy", Locale.getDefault()).format(new Date());
+        String fifthScore = String.valueOf(scoreList.getScore(4));
 
         final EditText nickname = findViewById(R.id.nickname);
         final Button addButton = findViewById(R.id.addButton);
@@ -170,19 +183,21 @@ public class gamePage extends AppCompatActivity {
         discardPile.setVisibility(View.INVISIBLE);
         userPile.setVisibility(View.INVISIBLE);
 
-        //if time < 5th score on score page
-        nickname.setVisibility(View.VISIBLE);
-        addButton.setVisibility(View.VISIBLE);
-        cancelButton.setVisibility(View.VISIBLE);
-        winMessage.setVisibility(View.VISIBLE);
+        if ((scoreList.getMyScore() != null && score < Integer.parseInt(fifthScore))){
+            nickname.setVisibility(View.VISIBLE);
+            addButton.setVisibility(View.VISIBLE);
+            cancelButton.setVisibility(View.VISIBLE);
+            winMessage.setVisibility(View.VISIBLE);
 
-        setAddButton(addButton, cancelButton, nickname, winMessage, date);
-        setCancelButton(cancelButton, addButton, nickname, winMessage);
-        //else
-        winMessage.setText(R.string.loseMessage);
-        winMessage.setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.VISIBLE);
-        setBackToMenuButton(winMessage, backButton);
+            setAddButton(addButton, cancelButton, nickname, winMessage, date);
+            setCancelButton(cancelButton, addButton, nickname, winMessage);
+        }
+        else{
+            winMessage.setText(R.string.loseMessage);
+            winMessage.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.VISIBLE);
+            setBackToMenuButton(winMessage, backButton);
+        }
     }
 
     public void setBackToMenuButton(final TextView winMessage, final Button backButton){
@@ -200,9 +215,8 @@ public class gamePage extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double time = 3.0;
                 String name = nickname.getText().toString();
-                String score = String.valueOf(time);
+                String Score = String.valueOf(score);
 
                 if (name.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Nickname must be inputted", Toast.LENGTH_LONG).show();
@@ -214,7 +228,7 @@ public class gamePage extends AppCompatActivity {
 
                     Intent intent = new Intent(gamePage.this, scorePage.class);
                     intent.putExtra("nickname", name);
-                    intent.putExtra("score", score);
+                    intent.putExtra("score", Score);
                     intent.putExtra("date", date);
                     startActivity(intent);
                 }
