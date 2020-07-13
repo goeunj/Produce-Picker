@@ -36,13 +36,17 @@ public class scoreManager {
 
     //sets new score
     public void setNewScore(String nickname, String score, String date){
-        int i=5;
-        while (i > 0){
-            if (Integer.parseInt(myScore.get(i).getScore()) >Integer.parseInt(score) && Integer.parseInt(myScore.get(i-1).getScore()) < Integer.parseInt(score)){
-                myScore.set(i, new score(nickname, score, date));
-                break;
+        if (Integer.parseInt(myScore.get(0).getScore()) >= Integer.parseInt(score)){
+            myScore.set(0, new score(nickname, score, date));
+        }else{
+            int i=4;
+            while (i > 0){
+                if (Integer.parseInt(myScore.get(i).getScore()) >= Integer.parseInt(score) && Integer.parseInt(myScore.get(i-1).getScore()) < Integer.parseInt(score)){
+                    myScore.set(i, new score(nickname, score, date));
+                    break;
+                }
+                i--;
             }
-            i--;
         }
     }
 

@@ -12,7 +12,7 @@
     <string name="setButton">SET</string>
     <string name="rules_title">Rules</string>
     <string name="winMessage">YOU DID IT :D</string>
-    <string name="loseMessage">MAYBE NEXT TIME :O</string>
+    <string name="loseMessage">YOUR SCORE DIDN\'T MAKE IT TO THE SCORE BOARD</string>
     <string name="addScore">ADD</string>
     <string name="cancelScore" tools:ignore="ButtonCase">CANCEL</string>
     <string name="backToMenu">MENU</string>
@@ -20,5 +20,6 @@
     <string name="scorePageTitle">TOP 5 SCORES</string>
     <string name="reset">RESET</string>
     <string name="rules">Welcome to Find daMatch! There is a deck with 7 cards and each card has 3 images on it. The top card is placed face up separately in the discard pile and you must match an image on a card in the main pile with one in the discard pile while being times. The card is then put in the discard pile and this repeats until no cards are left and the timer stops.</string>
+    <string name="nicknameMessage">NICKNAME MUST BE INPUTTED</string>
     >>>>>>> app/src/main/res/values/strings.xml
 </resources>

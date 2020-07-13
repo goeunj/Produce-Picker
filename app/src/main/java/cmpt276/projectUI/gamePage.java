@@ -219,7 +219,7 @@ public class gamePage extends AppCompatActivity {
                 String Score = String.valueOf(score);
 
                 if (name.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nickname must be inputted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.nicknameMessage, Toast.LENGTH_LONG).show();
                 }else{
                     nickname.setVisibility(View.INVISIBLE);
                     addButton.setVisibility(View.INVISIBLE);

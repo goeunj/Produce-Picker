@@ -56,7 +56,7 @@ public class scorePage extends AppCompatActivity {
         adapter = new customAdapter(manager.getMyScore(), getApplicationContext(), manager);
         listView.setAdapter(adapter);
 
-        manager.getMyScore().add(new score("player1", "2000", "07.11.2020"));
+        manager.getMyScore().add(new score("player1", "9000", "07.11.2020"));
         manager.getMyScore().add(new score("player2", "30000", "07.11.2020"));
         manager.getMyScore().add(new score("player3", "400000", "07.11.2020"));
         manager.getMyScore().add(new score("player4", "5000000", "07.11.2020"));
