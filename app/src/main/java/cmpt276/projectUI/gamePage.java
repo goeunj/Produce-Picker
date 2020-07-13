@@ -48,7 +48,7 @@ public class gamePage extends AppCompatActivity {
     int score;
     int[] myCard;
     int[] discard;
-    int[] cards = {0,1,2,3,4,5,6};
+    int[] cards;
     String[] Fruit = {"apple", "banana", "cherry", "orange", "peach", "strawberry", "watermelon"};
     String[] Veg = {"broccoli", "carrot", "lettuce", "mushroom", "onion", "pepper", "potato"};
     String[] Chosen;
@@ -65,6 +65,7 @@ public class gamePage extends AppCompatActivity {
         count = 0;
 
         time = findViewById(R.id.time);
+
         getUserOption();
 
         drawCard(cards);
@@ -134,7 +135,7 @@ public class gamePage extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    time.start();
+
                     int num = (int) button.getTag();
                     buttonClicked(num);
                 }
@@ -146,7 +147,13 @@ public class gamePage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void buttonClicked(int num) {
+        if (count == 0){
+            time.setBase(SystemClock.elapsedRealtime());
+            time.start();
+        }
+
         if (GameLogic.isThereAMatch(num, discard)){
+
             count++;
 
             if (count == 6){
