@@ -66,6 +66,8 @@ public class gamePage extends AppCompatActivity {
         count = 0;
 
         time = findViewById(R.id.time);
+        time.setBase(SystemClock.elapsedRealtime());
+        time.start();
 
         getUserOption();
 
@@ -149,10 +151,6 @@ public class gamePage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void buttonClicked(int num) {
-        if (count == 0){
-            time.setBase(SystemClock.elapsedRealtime());
-            time.start();
-        }
 
         if (GameLogic.isThereAMatch(num, discard)){
 
@@ -178,7 +176,6 @@ public class gamePage extends AppCompatActivity {
     private void setMessage(){
         score = (int)(SystemClock.elapsedRealtime() - time.getBase());
         String date = new SimpleDateFormat("MM.dd.yyyy", Locale.getDefault()).format(new Date());
-        String fifthScore = String.valueOf(scoreList.getScore(4));
 
         final EditText nickname = findViewById(R.id.nickname);
         final Button addButton = findViewById(R.id.addButton);
@@ -192,7 +189,6 @@ public class gamePage extends AppCompatActivity {
         discardPile.setVisibility(View.INVISIBLE);
         userPile.setVisibility(View.INVISIBLE);
 
-        if ((scoreList.getMyScore() != null && score < Integer.parseInt(fifthScore))){
             nickname.setVisibility(View.VISIBLE);
             addButton.setVisibility(View.VISIBLE);
             cancelButton.setVisibility(View.VISIBLE);
@@ -200,13 +196,6 @@ public class gamePage extends AppCompatActivity {
 
             setAddButton(addButton, cancelButton, nickname, winMessage, date);
             setCancelButton(cancelButton, addButton, nickname, winMessage);
-        }
-        else{
-            winMessage.setText(R.string.loseMessage);
-            winMessage.setVisibility(View.VISIBLE);
-            backButton.setVisibility(View.VISIBLE);
-            setBackToMenuButton(winMessage, backButton);
-        }
     }
 
     public void setBackToMenuButton(final TextView winMessage, final Button backButton){

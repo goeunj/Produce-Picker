@@ -62,11 +62,11 @@ public class scorePage extends AppCompatActivity {
         adapter = new customAdapter(manager.getMyScore(), getApplicationContext(), manager);
         listView.setAdapter(adapter);
 
-        manager.getMyScore().add(new score("player1", "9000", "07.11.2020"));
-        manager.getMyScore().add(new score("player2", "30000", "07.11.2020"));
-        manager.getMyScore().add(new score("player3", "400000", "07.11.2020"));
-        manager.getMyScore().add(new score("player4", "5000000", "07.11.2020"));
-        manager.getMyScore().add(new score("player5", "60000000", "07.11.2020"));
+        manager.getMyScore().add(new score("Jonny", "5000", "07.11.2020"));
+        manager.getMyScore().add(new score("David", "7000", "07.11.2020"));
+        manager.getMyScore().add(new score("James", "10000", "07.11.2020"));
+        manager.getMyScore().add(new score("George", "15000", "07.11.2020"));
+        manager.getMyScore().add(new score("Brian", "20000", "07.11.2020"));
 
         Intent intent = getIntent();
         //if (intent.getExtras() != null && !resetButton.isPressed()){
@@ -74,9 +74,9 @@ public class scorePage extends AppCompatActivity {
         //}
 
         SharedPreferences preferences = getSharedPreferences("prefs", 0);
-        score = preferences.getInt("Score", 0);
-        nick = preferences.getString("Name", "George");
-        date = preferences.getString("Date", "Date");
+        score = preferences.getInt("Score", 999999999);
+        nick = preferences.getString("Name", "Jonny");
+        date = preferences.getString("Date", "07.11.2020");
 
         String scoreString = String.valueOf(score);
 
@@ -105,7 +105,10 @@ public class scorePage extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetButton.setPressed(true);
+                SharedPreferences preferences = getSharedPreferences("prefs", 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
                 listView.removeAllViewsInLayout();
                 adapter.clear();
                 setList();

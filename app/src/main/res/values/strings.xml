@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="skip">Skip</string>
     <string name="madeBy">By: Jacob, Dayne, Goeun, and Sparsh</string>
-    <string name="app_name">Find daFruit</string>
+    <string name="app_name">PRODUCE PICKER</string>
     <string name="startButton">START</string>
     <string name="scoreButton">SCORES</string>
     <string name="optionButton">OPTIONS</string>

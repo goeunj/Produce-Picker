@@ -37,12 +37,42 @@ public class scoreManager {
     //sets new score
     public void setNewScore(String nickname, String score, String date){
         if (Integer.parseInt(myScore.get(0).getScore()) >= Integer.parseInt(score)){
+            score temp1 = myScore.get(0);
+            score temp2 = myScore.get(1);
+            score temp3 = myScore.get(2);
+            score temp4 = myScore.get(3);
+            myScore.set(1, temp1);
+            myScore.set(2, temp2);
+            myScore.set(3, temp3);
+            myScore.set(4, temp4);
             myScore.set(0, new score(nickname, score, date));
+
         }else{
             int i=4;
             while (i > 0){
                 if (Integer.parseInt(myScore.get(i).getScore()) >= Integer.parseInt(score) && Integer.parseInt(myScore.get(i-1).getScore()) < Integer.parseInt(score)){
-                    myScore.set(i, new score(nickname, score, date));
+                    score temp1 = myScore.get(1);
+                    score temp2 = myScore.get(2);
+                    score temp3 = myScore.get(3);
+
+                    if(i==1){
+                        myScore.set(i, new score(nickname, score, date));
+                        myScore.set(2, temp1);
+                        myScore.set(3, temp2);
+                        myScore.set(4, temp3);
+                    }
+                    if(i==2){
+                        myScore.set(i, new score(nickname, score, date));
+                        myScore.set(3, temp2);
+                        myScore.set(4, temp3);
+                    }
+                    if(i==3){
+                        myScore.set(i, new score(nickname, score, date));
+                        myScore.set(4, temp3);
+                    }
+                    if(i==4) {
+                        myScore.set(i, new score(nickname, score, date));
+                    }
                     break;
                 }
                 i--;
