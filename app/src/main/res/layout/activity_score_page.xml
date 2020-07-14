@@ -11,7 +11,7 @@
         android:id="@+id/scorePageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="4dp"
         android:shadowColor="#80CBC4"
         android:shadowRadius="25"
         android:text="@string/scorePageTitle"
@@ -21,19 +21,19 @@
         app:fontFamily="@font/chicle"
         app:layout_constraintBottom_toTopOf="@+id/listScore"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/listScore"
-        android:layout_width="412dp"
-        android:layout_height="362dp"
+        android:layout_width="409dp"
+        android:layout_height="463dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
 
     <ImageButton
         android:id="@+id/backButton"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:background="#FCE4EC"
         android:text="@string/reset"
         android:textColor="#1B5E20"

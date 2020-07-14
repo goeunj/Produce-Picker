@@ -42,7 +42,6 @@ import static android.widget.Toast.LENGTH_SHORT;
  */
 
 public class gamePage extends AppCompatActivity {
-    private scoreManager scoreList = scoreManager.getInstance();
     private optionManager option = optionManager.getInstance();
     Chronometer time;
 
@@ -180,7 +179,6 @@ public class gamePage extends AppCompatActivity {
         final EditText nickname = findViewById(R.id.nickname);
         final Button addButton = findViewById(R.id.addButton);
         final Button cancelButton = findViewById(R.id.cancelButton);
-        final Button backButton = findViewById(R.id.backToMenu);
         final TextView winMessage = findViewById(R.id.winMessage);
 
         TableLayout discardPile = findViewById(R.id.tblDiscard);
@@ -198,23 +196,12 @@ public class gamePage extends AppCompatActivity {
             setCancelButton(cancelButton, addButton, nickname, winMessage);
     }
 
-    public void setBackToMenuButton(final TextView winMessage, final Button backButton){
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                winMessage.setVisibility(View.INVISIBLE);
-                backButton.setVisibility(View.INVISIBLE);
-                startActivity(new Intent(gamePage.this, menuPage.class));
-            }
-        });
-    }
 
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = nickname.getText().toString();
-                String Score = String.valueOf(score);
 
                 if (name.isEmpty()) {
                     Toast.makeText(getApplicationContext(), R.string.nicknameMessage, Toast.LENGTH_LONG).show();
@@ -232,9 +219,7 @@ public class gamePage extends AppCompatActivity {
                     editor.putInt("Score", score);
                     editor.putString("Date", date);
                     editor.apply();
-                    //intent.putExtra("nickname", name);
-                    //intent.putExtra("score", Score);
-                    //intent.putExtra("date", date);
+                    scorePage.flag = true;
                     startActivity(intent);
                 }
             }

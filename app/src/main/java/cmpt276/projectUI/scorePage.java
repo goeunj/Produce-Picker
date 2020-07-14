@@ -28,11 +28,10 @@ public class scorePage extends AppCompatActivity {
     private scoreManager manager = scoreManager.getInstance();
     customAdapter adapter;
     ListView listView;
-
+    static Boolean flag = false;
     String nick;
     int score;
     String date;
-    String scoreString;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -43,6 +42,7 @@ public class scorePage extends AppCompatActivity {
         setBackButton();
         setList();
         setResetButton();
+        flag = false;
     }
 
     private void setBackButton() {
@@ -56,7 +56,6 @@ public class scorePage extends AppCompatActivity {
     }
 
     private void setList(){
-        Button resetButton = findViewById(R.id.resetButton);
         listView = findViewById(R.id.listScore);
 
         adapter = new customAdapter(manager.getMyScore(), getApplicationContext(), manager);
@@ -68,20 +67,19 @@ public class scorePage extends AppCompatActivity {
         manager.getMyScore().add(new score("George", "15000", "07.11.2020"));
         manager.getMyScore().add(new score("Brian", "20000", "07.11.2020"));
 
-        Intent intent = getIntent();
-        //if (intent.getExtras() != null && !resetButton.isPressed()){
-            //setNewScore(intent);
-        //}
+        if(flag){
+            SharedPreferences preferences = getSharedPreferences("prefs", 0);
+            score = preferences.getInt("Score", 999999999);
+            nick = preferences.getString("Name", "Jonny");
+            date = preferences.getString("Date", "07.11.2020");
 
-        SharedPreferences preferences = getSharedPreferences("prefs", 0);
-        score = preferences.getInt("Score", 999999999);
-        nick = preferences.getString("Name", "Jonny");
-        date = preferences.getString("Date", "07.11.2020");
+            String scoreString = String.valueOf(score);
 
-        String scoreString = String.valueOf(score);
+            manager.setNewScore(nick, scoreString, date);
+            adapter.notifyDataSetChanged();
+        }
 
-        manager.setNewScore(nick, scoreString, date);
-        adapter.notifyDataSetChanged();
+
 
 
         if (manager.getMyScore().size() > 5){
@@ -90,14 +88,7 @@ public class scorePage extends AppCompatActivity {
         }
     }
 
-    private void setNewScore(Intent intent){
-        String nickname = intent.getStringExtra("nickname");
-        String score = intent.getStringExtra("score");
-        String date = intent.getStringExtra("date");
 
-        manager.setNewScore(nickname, score, date);
-        adapter.notifyDataSetChanged();
-    }
 
     private void setResetButton(){
         final Button resetButton = findViewById(R.id.resetButton);
