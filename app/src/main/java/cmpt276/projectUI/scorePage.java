@@ -22,6 +22,7 @@ import cmpt276.projectLogic.scoreManager;
  * setNewScore = sets new score in correct place
  * removeDuplicates = removes duplicate list
  * setResetButton = resets list with default values
+ * uses flags to dodge duplicates
  */
 
 public class scorePage extends AppCompatActivity {
