@@ -3,6 +3,7 @@ package cmpt276.projectUI;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,11 @@ public class scorePage extends AppCompatActivity {
     private scoreManager manager = scoreManager.getInstance();
     customAdapter adapter;
     ListView listView;
+
+    String nick;
+    int score;
+    String date;
+    String scoreString;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -63,9 +69,20 @@ public class scorePage extends AppCompatActivity {
         manager.getMyScore().add(new score("player5", "60000000", "07.11.2020"));
 
         Intent intent = getIntent();
-        if (intent.getExtras() != null && !resetButton.isPressed()){
-            setNewScore(intent);
-        }
+        //if (intent.getExtras() != null && !resetButton.isPressed()){
+            //setNewScore(intent);
+        //}
+
+        SharedPreferences preferences = getSharedPreferences("prefs", 0);
+        score = preferences.getInt("Score", 0);
+        nick = preferences.getString("Name", "George");
+        date = preferences.getString("Date", "Date");
+
+        String scoreString = String.valueOf(score);
+
+        manager.setNewScore(nick, scoreString, date);
+        adapter.notifyDataSetChanged();
+
 
         if (manager.getMyScore().size() > 5){
             manager.removeDuplicates();

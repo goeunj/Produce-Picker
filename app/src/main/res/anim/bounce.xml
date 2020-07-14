@@ -13,7 +13,7 @@
         android:toXScale="1"
         android:pivotY="50%"
         android:pivotX="50%"
-        android:fromYScale="0"
+        android:fromYScale=".9"
         android:fromXScale="1"
         android:duration="1000"/>
 

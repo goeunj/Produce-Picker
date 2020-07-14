@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -133,6 +134,7 @@ public class gamePage extends AppCompatActivity {
             button.setTag(myCard[i]);
 
             button.setOnClickListener(new View.OnClickListener(){
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View v) {
 
@@ -234,9 +236,16 @@ public class gamePage extends AppCompatActivity {
                     winMessage.setVisibility(View.INVISIBLE);
 
                     Intent intent = new Intent(gamePage.this, scorePage.class);
-                    intent.putExtra("nickname", name);
-                    intent.putExtra("score", Score);
-                    intent.putExtra("date", date);
+
+                    SharedPreferences preferences = getSharedPreferences("prefs", 0);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("Name", name);
+                    editor.putInt("Score", score);
+                    editor.putString("Date", date);
+                    editor.apply();
+                    //intent.putExtra("nickname", name);
+                    //intent.putExtra("score", Score);
+                    //intent.putExtra("date", date);
                     startActivity(intent);
                 }
             }
