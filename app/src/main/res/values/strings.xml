@@ -11,7 +11,7 @@
     <string name="optionMessage">OPTION MUST BE SELECTED TO SET</string>
     <string name="setButton">SET</string>
     <string name="rules_title">Rules</string>
-    <string name="winMessage">YOU DID IT :D</string>
+    <string name="winMessage">YOU FOUND ALL \n OF THE MATCHES :D</string>
     <string name="loseMessage">YOUR SCORE DIDN\'T MAKE IT TO THE SCORE BOARD</string>
     <string name="addScore">ADD</string>
     <string name="cancelScore" tools:ignore="ButtonCase">CANCEL</string>
