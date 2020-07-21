@@ -19,8 +19,8 @@
 
     <RadioGroup
         android:id="@+id/options"
-        android:layout_width="136dp"
-        android:layout_height="88dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +44,28 @@
             android:layout_height="wrap_content"
             android:background="#FCE4EC"
             android:text="@string/fruitButton"
+            android:textColor="#1B5E20"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/fruitImgTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FCE4EC"
+            android:text="@string/fruitImgTxt"
+            android:textColor="#1B5E20"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/vegImgTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E1F5FE"
+            android:text="@string/vegImgTxt"
             android:textColor="#1B5E20"
             android:textSize="36sp"
             android:textStyle="bold"
