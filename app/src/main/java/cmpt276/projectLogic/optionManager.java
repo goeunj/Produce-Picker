@@ -41,7 +41,7 @@ public class optionManager {
         }
     }
 
-    public String getMyOption(){
+    public String getUserTheme(){
         return this.userTheme;
     }
 }

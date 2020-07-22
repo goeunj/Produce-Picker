@@ -6,6 +6,7 @@ import java.util.Random;
  * Class for the backend logic of the game. Functions to get random cards each game and to determine a match
  */
 public class GameLogic {
+    private optionManager option = optionManager.getInstance();
     private static Random r = new Random();
 
     public GameLogic() {
