@@ -38,8 +38,9 @@ import static android.widget.Toast.LENGTH_SHORT;
  * on click, if match = move card to discard pile
  * game ends when all user cards are on discard pile
  *
- * when time/score < 5th score on score list, shows win message
- * when time/score > 5th score on score list, shows lose message
+ * when all matches found, shows win message + ask for nickname
+ *      time/score < 5th score shows on score list
+ *      time/score > 5th score on score list, shows lose message/toast
  */
 
 public class gamePage extends AppCompatActivity {
@@ -114,17 +115,6 @@ public class gamePage extends AppCompatActivity {
         }
     }
 
-    public void getImageOrText(){
-        Random r = new Random();
-        int index = r.nextInt(2);
-
-        if (index == 0) {
-            cardType = Image;
-        } else{
-            cardType = ImgTxt;
-        }
-    }
-
     private void drawCard(int[] cards){
         int cardNum = GameLogic.nextCard(cards);
         myCard  = GameLogic.getCard(cardNum);
@@ -155,9 +145,10 @@ public class gamePage extends AppCompatActivity {
         table.addView(tableRow);
 
         for (int i = 0; i < 3; i++) {
+
             if (option.getUserTheme().equals("FRUITS+TEXT") || option.getUserTheme().equals("VEGGIES+TEXT")){
                 if (position.equals("Draw") || count == 0){
-                    getImageOrText();
+                    cardType = GameLogic.getImageOrText(Image, ImgTxt);
                     if (cardType == Image) {
                         ImageCount++;
                     } else if (cardType == ImgTxt) {
@@ -168,6 +159,7 @@ public class gamePage extends AppCompatActivity {
                     } else if (TextCount == 2) {
                         cardType = Image;
                     }
+                    //keeps track of the cardType on draw card pile to make cardType on discard pile the same when user card is 'moved'
                     drawCardType.add(i, cardType);
                 }else if (count > 0){
                     cardType = drawCardType.get(i);

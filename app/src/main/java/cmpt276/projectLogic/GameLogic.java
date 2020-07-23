@@ -1,5 +1,6 @@
 package cmpt276.projectLogic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -68,5 +69,16 @@ public class GameLogic {
                 throw new IllegalStateException("Not a valid card " + cardNum);
         }
         return card;
+    }
+
+    public static String[] getImageOrText(String[] Image, String[] ImgTxt){         //randomly chooses Image or ImgTxt
+        Random r = new Random();
+        int index = r.nextInt(2);
+
+        if (index == 0) {
+            return Image;
+        } else{
+            return ImgTxt;
+        }
     }
 }
