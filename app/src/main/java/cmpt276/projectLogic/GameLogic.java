@@ -1,13 +1,12 @@
 package cmpt276.projectLogic;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class for the backend logic of the game. Functions to get random cards each game and to determine a match
+ * Class for the backend logic of the game
+ * Functions to get random cards each game and to determine a match
  */
 public class GameLogic {
-    private optionManager option = optionManager.getInstance();
     private static Random r = new Random();
 
     public GameLogic() {

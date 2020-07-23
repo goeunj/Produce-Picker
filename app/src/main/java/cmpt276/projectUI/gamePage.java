@@ -25,7 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import cmpt276.projectLogic.GameLogic;
 import cmpt276.project.R;
@@ -245,7 +244,6 @@ public class gamePage extends AppCompatActivity {
         setCancelButton(cancelButton, addButton, nickname, winMessage);
     }
 
-
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,5 +285,4 @@ public class gamePage extends AppCompatActivity {
             }
         });
     }
-
 }
