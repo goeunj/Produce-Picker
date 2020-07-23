@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import cmpt276.project.R;
 import cmpt276.projectLogic.customAdapter;
@@ -76,12 +77,13 @@ public class scorePage extends AppCompatActivity {
 
             String scoreString = String.valueOf(score);
 
-            manager.setNewScore(nick, scoreString, date);
-            adapter.notifyDataSetChanged();
+            if (Integer.parseInt(manager.getMyScore().get(4).getScore()) < Integer.parseInt(scoreString)){
+                Toast.makeText(this, R.string.loseMessage, Toast.LENGTH_LONG).show();
+            }else{
+                manager.setNewScore(nick, scoreString, date);
+                adapter.notifyDataSetChanged();
+            }
         }
-
-
-
 
         if (manager.getMyScore().size() > 5){
             manager.removeDuplicates();

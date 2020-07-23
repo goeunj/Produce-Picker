@@ -180,12 +180,16 @@ public class gamePage extends AppCompatActivity {
         final Button addButton = findViewById(R.id.addButton);
         final Button cancelButton = findViewById(R.id.cancelButton);
         final TextView winMessage = findViewById(R.id.winMessage);
+        final TextView txtDiscard = findViewById(R.id.txtDiscard);
+        final TextView txtDraw = findViewById(R.id.txtDraw);
 
         TableLayout discardPile = findViewById(R.id.tblDiscard);
         TableLayout userPile = findViewById(R.id.tblDraw);
 
         discardPile.setVisibility(View.INVISIBLE);
         userPile.setVisibility(View.INVISIBLE);
+        txtDiscard.setVisibility(View.INVISIBLE);
+        txtDraw.setVisibility(View.INVISIBLE);
 
             nickname.setVisibility(View.VISIBLE);
             addButton.setVisibility(View.VISIBLE);
