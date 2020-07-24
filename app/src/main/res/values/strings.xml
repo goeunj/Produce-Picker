@@ -23,5 +23,8 @@
     <string name="nicknameMessage">NICKNAME MUST BE INPUTTED</string>
     <string name="discard_pile">Discard Pile</string>
     <string name="draw_pile">Draw Pile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_selector">Images</string>
     >>>>>>> app/src/main/res/values/strings.xml
 </resources>

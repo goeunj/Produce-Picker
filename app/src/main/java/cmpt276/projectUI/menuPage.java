@@ -1,8 +1,5 @@
 package cmpt276.projectUI;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +8,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import cmpt276.project.R;
+import cmpt276.projectFlickr.PhotoGalleryActivity;
 
 /**
  * start button goes to game page
@@ -38,11 +39,13 @@ public class menuPage extends AppCompatActivity {
         Button scoreButton = findViewById(R.id.scoreButton);
         Button optionButton = findViewById(R.id.optionButton);
         Button helpButton = findViewById(R.id.helpButton);
+        Button imagesButton = findViewById(R.id.imagesButton);
 
         startButton.startAnimation(bounce);
         scoreButton.startAnimation(bounce);
         optionButton.startAnimation(bounce);
         helpButton.startAnimation(bounce);
+        imagesButton.startAnimation(bounce);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,13 @@ public class menuPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(menuPage.this, helpPage.class));
+            }
+        });
+
+        imagesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(menuPage.this, PhotoGalleryActivity.class));
             }
         });
     }

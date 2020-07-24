@@ -78,4 +78,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/optionButton" />
 
+    <Button
+        android:id="@+id/imagesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="#FCE4EC"
+        android:text="@string/image_selector"
+        android:textColor="#1B5E20"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/chicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
