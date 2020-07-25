@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="cmpt276.project">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cmpt276.projectFlickr.PhotoGalleryActivity"
-            android:theme="@style/SearchTheme"
-            android:label="@string/Search"/>
+        <activity android:name="cmpt276.projectFlickr.imageEditPage"
+            android:label="Choose Images to Remove"
+            android:theme="@style/SearchTheme"/>
+        <activity
+            android:name="cmpt276.projectFlickr.PhotoGalleryActivity"
+            android:label="Search"
+            android:theme="@style/SearchTheme" />
         <activity
             android:name="cmpt276.projectUI.splashScreen"
             android:launchMode="singleTask"
@@ -21,6 +26,7 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

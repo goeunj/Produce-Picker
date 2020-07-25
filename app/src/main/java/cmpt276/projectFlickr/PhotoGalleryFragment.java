@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cmpt276.project.R;
+
+import static android.widget.Toast.LENGTH_SHORT;
+import static cmpt276.projectFlickr.ImagesArray.myImages;
 
 public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
     private static final String TAG = "PhotoGalleryFragment";
@@ -38,6 +42,7 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setHasOptionsMenu(true);
@@ -141,8 +146,28 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
 
     @Override
     public void onNoteClick(int position) {
-        mItems.get(position);
-        Log.d(TAG, "onNoteClick: clicked");
+        GalleryItem myItem = mItems.get(position);
+        //boolean add = true;
+//        for (GalleryItem items : myImages){
+//            if (items == myItem){
+//                GalleryItem[] tempArray = new GalleryItem[31];
+//                int counter = 0;
+//                for (GalleryItem Ritems : myImages){
+//                    if (Ritems != myItem){
+//                        tempArray[counter] = Ritems;
+//                        counter++;
+//                    }
+//                }
+//                myImages = tempArray;
+//                Toast.makeText(getActivity(), "Item Removed", LENGTH_SHORT).show();
+//                add = false;
+//            }
+//        }
+        //if (add){
+            myImages.add(myItem);
+            Toast.makeText(getActivity(), "Item Added", LENGTH_SHORT).show();
+        //}
+
     }
 
     private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -167,7 +192,7 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
     }
 
 
-    private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
+    public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
 
         private List<GalleryItem> mGalleryItems;
         public OnNoteListener mOnNoteListener;
@@ -197,15 +222,10 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
             return mGalleryItems.size();
         }
 
-        public void onNoteClick(int position){
-            Log.d(TAG, "onNoteClick: clicked");
-        }
-
-
 
     }
 
-    private class FetchItemsTask extends AsyncTask<Void, Void, List<GalleryItem>> {
+    public class FetchItemsTask extends AsyncTask<Void, Void, List<GalleryItem>> {
 
         private String mQuery;
 
@@ -230,5 +250,7 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
         }
 
     }
+
+
 
 }
