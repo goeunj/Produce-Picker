@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="cmpt276.projectFlickr.PhotoGalleryActivity"
-            android:theme="@style/SearchTheme"/>
+            android:theme="@style/SearchTheme"
+            android:label="@string/Search"/>
         <activity
             android:name="cmpt276.projectUI.splashScreen"
             android:launchMode="singleTask"
@@ -20,7 +21,6 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

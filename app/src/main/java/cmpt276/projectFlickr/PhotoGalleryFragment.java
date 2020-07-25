@@ -20,13 +20,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cmpt276.project.R;
 
-public class PhotoGalleryFragment extends Fragment {
+public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
     private static final String TAG = "PhotoGalleryFragment";
 
     private RecyclerView mPhotoRecyclerView;
@@ -136,37 +135,53 @@ public class PhotoGalleryFragment extends Fragment {
 
     private void setupAdapter() {
         if (isAdded()) {
-            mPhotoRecyclerView.setAdapter(new PhotoAdapter(mItems));
+            mPhotoRecyclerView.setAdapter(new PhotoAdapter(mItems, this));
         }
     }
 
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onNoteClick(int position) {
+        mItems.get(position);
+        Log.d(TAG, "onNoteClick: clicked");
+    }
+
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView mItemImageView;
+        OnNoteListener onNoteListener;
 
-        public PhotoHolder(View itemView) {
+        public PhotoHolder(View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-
             mItemImageView = (ImageView) itemView.findViewById(R.id.item_image_view);
+            this.onNoteListener = onNoteListener;
+            itemView.setOnClickListener(this);
         }
 
         public void bindDrawable(Drawable drawable) {
             mItemImageView.setImageDrawable(drawable);
         }
+
+        @Override
+        public void onClick(View v) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
     }
+
 
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
 
         private List<GalleryItem> mGalleryItems;
+        public OnNoteListener mOnNoteListener;
 
-        public PhotoAdapter(List<GalleryItem> galleryItems) {
+        public PhotoAdapter(List<GalleryItem> galleryItems, OnNoteListener onNoteListener) {
             mGalleryItems = galleryItems;
+            this.mOnNoteListener = onNoteListener;
         }
 
         @Override
         public PhotoHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             View view = inflater.inflate(R.layout.list_item_gallery, viewGroup, false);
-            return new PhotoHolder(view);
+            return new PhotoHolder(view, mOnNoteListener);
         }
 
         @Override
@@ -181,6 +196,13 @@ public class PhotoGalleryFragment extends Fragment {
         public int getItemCount() {
             return mGalleryItems.size();
         }
+
+        public void onNoteClick(int position){
+            Log.d(TAG, "onNoteClick: clicked");
+        }
+
+
+
     }
 
     private class FetchItemsTask extends AsyncTask<Void, Void, List<GalleryItem>> {
