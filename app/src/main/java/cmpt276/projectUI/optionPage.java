@@ -1,7 +1,5 @@
 package cmpt276.projectUI;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +9,9 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
@@ -57,6 +58,7 @@ public class optionPage extends AppCompatActivity {
                 vegeButton = findViewById(R.id.vegeButton);
                 fruitImgTxt = findViewById(R.id.fruitImgTxt);
                 vegImgTxt = findViewById(R.id.vegImgTxt);
+                flickrButton = findViewById(R.id.flickrButton);
                 themeSelected = options.getCheckedRadioButtonId();
 
                 order = findViewById(R.id.order);

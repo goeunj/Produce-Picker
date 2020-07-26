@@ -81,6 +81,9 @@ public class optionManager {
                     userOption.get(0).setUSerPileSize(31);
                 }
                 break;
+            case R.id.flickrButton:
+                userTheme = String.valueOf(flickrButton.getText());
+                break;
         }
     }
 

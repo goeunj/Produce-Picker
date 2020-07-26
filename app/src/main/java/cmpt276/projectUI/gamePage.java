@@ -1,8 +1,5 @@
 package cmpt276.projectUI;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -11,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -21,16 +19,22 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import cmpt276.projectLogic.GameLogic;
 import cmpt276.project.R;
+import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static cmpt276.projectFlickr.ImagesArray.myImages;
 
 /**
  * populate correct cards according to user option
@@ -68,12 +72,19 @@ public class gamePage extends AppCompatActivity {
             "celery2", "chickpea2", "corn2", "eggplant2", "garlic2", "ginger2", "greenonion2", "kale2", "kidneybean2", "lettuce2", "mushroom2",
             "okra2", "onion2", "parsnip2", "pepper2", "potato2", "raddish2", "tomato2", "turnip2", "yam2", "zuchini2", "leek2"};
 
+    String[] flickr = new String[31];
+
     //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
 
         drawCardType = new ArrayList<>();
         getUserTheme();
@@ -93,17 +104,36 @@ public class gamePage extends AppCompatActivity {
             cards = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
             images = 6;
         }
+        count = 0;
+        if (option.getUserTheme().equals("FLICKR")){
+            if (myImages.size() < cards.length){
+                Toast.makeText(getApplicationContext(), "Not enough images in Flickr set", Toast.LENGTH_LONG).show();
+                finish();
+                return;
+            }
+        }
 
         time = findViewById(R.id.time);
         time.setBase(SystemClock.elapsedRealtime());
         time.start();
 
+        getUserOption();
+
+
         drawCard(cards);
-        populateCard("Discard");
+        try {
+            populateCard("Discard");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         discard = myCard;
 
         drawCard(cards);
-        populateCard("Draw");
+        try {
+            populateCard("Draw");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for (int element: cards){
             System.out.println(element);
@@ -128,6 +158,10 @@ public class gamePage extends AppCompatActivity {
                 Image = Veg;
                 ImgTxt = VegText;
                 break;
+            case "FLICKR":
+                Image = flickr;
+                cardType = Image;
+
         }
     }
 
@@ -137,7 +171,7 @@ public class gamePage extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void populateCard(String position) {
+    private void populateCard(String position) throws IOException {
         int ImageCount = 0, TextCount = 0;
         TableLayout table = null;
 
@@ -189,12 +223,19 @@ public class gamePage extends AppCompatActivity {
                     TableRow.LayoutParams.MATCH_PARENT,
                     1.0f));
             button.setPadding(0, 0, 0, 0);
+            Bitmap bitmap = null;
 
-            int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
+            if (option.getUserTheme().equals("FLICKR")){
+                InputStream input = new java.net.URL(myImages.get(myCard[i]).getUrl()).openStream();
+                bitmap = BitmapFactory.decodeStream(input);
+            }
+            else {
+                int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
+                Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
+                bitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
+            }
             Resources resource = getResources();
-            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            button.setBackground(new BitmapDrawable(resource, bitmap));
             button.setTag(myCard[i]);
 
             button.setOnClickListener(new View.OnClickListener(){
@@ -203,7 +244,11 @@ public class gamePage extends AppCompatActivity {
                 public void onClick(View v) {
 
                     int num = (int) button.getTag();
-                    buttonClicked(num);
+                    try {
+                        buttonClicked(num);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
@@ -212,7 +257,7 @@ public class gamePage extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void buttonClicked(int num) {
+    private void buttonClicked(int num) throws IOException {
         if (GameLogic.isThereAMatch(num, discard)){
             count++;
 
