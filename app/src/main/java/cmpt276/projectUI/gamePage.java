@@ -48,21 +48,25 @@ public class gamePage extends AppCompatActivity {
     ArrayList<String[]> drawCardType;
     int score, count =0;
     int[] myCard, discard, cards;
+    int cardCount = 7;           //UPDATE TO OPTIONS SINGLETON
+    int gameOrder = 2;             //CHANGE WHEN OPTIONS DONE
+    int images;
+    int numCards = 7;             //CHANGE WHEN OPTIONS DONE
     String[] Image, ImgTxt, cardType;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
             "elderberry", "fig", "grape", "grapefruit", "guava", "kiwi", "kumquat", "lemon", "lime", "lychee", "mango", "papaya",
-            "peach", "pear", "pineapple", "plum", "raspberry", "starfruit", "strawberry", "watermelon"};
+            "peach", "pear", "pineapple", "plum", "raspberry", "starfruit", "strawberry", "watermelon", "honeydew", "cantaloupe"};
     String[] FruitText = {"apple2", "apricot2", "banana2", "blackberry2", "blueberry2", "cherry2", "cranberry2", "dragonfruit2", "durian2",
             "elderberry2", "fig2", "grape2", "grapefruit2", "guava2", "kiwi2", "kumquat2", "lemon2", "lime2", "lychee2", "mango2", "papaya2",
-            "peach2", "pear2", "pineapple2", "plum2", "raspberry2", "starfruit2", "strawberry2", "watermelon2"};
+            "peach2", "pear2", "pineapple2", "plum2", "raspberry2", "starfruit2", "strawberry2", "watermelon2", "cantaloupe2", "honeydew2"};
 
     String[] Veg = {"arugula", "asparagus", "bamboo", "bean", "blackbean",  "broccoli", "brusselsprout", "carrot", "cauliflower",
             "celery", "chickpea", "corn", "eggplant", "garlic", "ginger", "greenonion", "kale", "kidneybean", "lettuce", "mushroom",
-            "okra", "onion", "parsnip", "pepper", "potato", "raddish", "tomato", "turnip", "yam", "zuchini"};
+            "okra", "onion", "parsnip", "pepper", "potato", "raddish", "tomato", "turnip", "yam", "zuchini", "leek"};
     String[] VegText = {"arugula2", "asparagus2", "bamboo2", "bean2", "blackbean2",  "broccoli2", "brusselsprout2", "carrot2", "cauliflower2",
             "celery2", "chickpea2", "corn2", "eggplant2", "garlic2", "ginger2", "greenonion2", "kale2", "kidneybean2", "lettuce2", "mushroom2",
-            "okra2", "onion2", "parsnip2", "pepper2", "potato2", "raddish2", "tomato2", "turnip2", "yam2", "zuchini2"};
+            "okra2", "onion2", "parsnip2", "pepper2", "potato2", "raddish2", "tomato2", "turnip2", "yam2", "zuchini2", "leek2"};
 
     //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -72,7 +76,18 @@ public class gamePage extends AppCompatActivity {
         setContentView(R.layout.activity_game_page);
 
         drawCardType = new ArrayList<>();
-        cards = new int[]{0, 1, 2, 3, 4, 5, 6};
+        if(gameOrder == 2) {
+            cards = new int[]{0, 1, 2, 3, 4, 5, 6};
+            images = 3;
+        }
+        if (gameOrder == 3) {
+            cards = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            images = 4;
+        }
+        if(gameOrder == 5){
+            cards = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+            images = 6;
+        }
         count = 0;
 
         time = findViewById(R.id.time);
@@ -143,7 +158,7 @@ public class gamePage extends AppCompatActivity {
         assert table != null;
         table.addView(tableRow);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < images; i++) {
 
             if (option.getUserTheme().equals("FRUITS+TEXT") || option.getUserTheme().equals("VEGGIES+TEXT")){
                 if (position.equals("Draw") || count == 0){
@@ -199,7 +214,7 @@ public class gamePage extends AppCompatActivity {
         if (GameLogic.isThereAMatch(num, discard)){
             count++;
 
-            if (count == 6){
+            if (count == numCards-1){
                 time.stop();
                 setMessage();
                 return;
