@@ -105,7 +105,7 @@ public class gamePage extends AppCompatActivity {
             images = 6;
         }
         count = 0;
-        if (option.getUserTheme().equals("FLICKR")){
+        if (manager.getUserOption().get(0).getUserTheme().equals("FLICKR")){
             if (myImages.size() < cards.length){
                 Toast.makeText(getApplicationContext(), "Not enough images in Flickr set", Toast.LENGTH_LONG).show();
                 finish();
@@ -116,8 +116,6 @@ public class gamePage extends AppCompatActivity {
         time = findViewById(R.id.time);
         time.setBase(SystemClock.elapsedRealtime());
         time.start();
-
-        getUserOption();
 
 
         drawCard(cards);
@@ -225,7 +223,7 @@ public class gamePage extends AppCompatActivity {
             button.setPadding(0, 0, 0, 0);
             Bitmap bitmap = null;
 
-            if (option.getUserTheme().equals("FLICKR")){
+            if (manager.getUserOption().get(0).getUserTheme().equals("FLICKR")){
                 InputStream input = new java.net.URL(myImages.get(myCard[i]).getUrl()).openStream();
                 bitmap = BitmapFactory.decodeStream(input);
             }

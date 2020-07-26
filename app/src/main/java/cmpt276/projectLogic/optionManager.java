@@ -27,7 +27,7 @@ public class optionManager {
         return chosenOption;
     }
 
-    public void setMyOption(int themeSelected, RadioButton fruitImgTxt, RadioButton vegImgTxt, RadioButton fruitButton, RadioButton vegeButton){
+    public void setMyOption(int themeSelected, RadioButton fruitImgTxt, RadioButton vegImgTxt, RadioButton fruitButton, RadioButton vegeButton, RadioButton flickrButton){
         switch (themeSelected) {
             case R.id.fruitButton:
                 userOption.get(0).setUserTheme(fruitButton.getText().toString());
@@ -40,6 +40,9 @@ public class optionManager {
                 break;
             case R.id.vegImgTxt:
                 userOption.get(0).setUserTheme(vegImgTxt.getText().toString());
+                break;
+            case R.id.flickrButton:
+                userOption.get(0).setUserTheme(flickrButton.getText().toString());
                 break;
         }
     }
@@ -80,9 +83,6 @@ public class optionManager {
                 }else if (userOption.get(0).getUserOrder()==5){
                     userOption.get(0).setUSerPileSize(31);
                 }
-                break;
-            case R.id.flickrButton:
-                userTheme = String.valueOf(flickrButton.getText());
                 break;
         }
     }

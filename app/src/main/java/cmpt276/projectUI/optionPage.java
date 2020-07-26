@@ -23,7 +23,7 @@ import cmpt276.projectLogic.optionManager;
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     RadioGroup options, order, pileSize;
-    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt;
+    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrButton;
     RadioButton order2, order3, order5, size5, size10, size15, size20, sizeAll;
     int themeSelected, orderSelected, sizeSelected;
 
@@ -76,7 +76,7 @@ public class optionPage extends AppCompatActivity {
                 sizeSelected = pileSize.getCheckedRadioButtonId();
 
                 if(themeSelected != -1 && orderSelected != -1 && sizeSelected != -1){
-                    manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton);
+                    manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrButton);
                     manager.setMyOrder(orderSelected);
                     manager.setMySize(sizeSelected);
 
