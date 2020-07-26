@@ -147,26 +147,9 @@ public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
     @Override
     public void onNoteClick(int position) {
         GalleryItem myItem = mItems.get(position);
-        //boolean add = true;
-//        for (GalleryItem items : myImages){
-//            if (items == myItem){
-//                GalleryItem[] tempArray = new GalleryItem[31];
-//                int counter = 0;
-//                for (GalleryItem Ritems : myImages){
-//                    if (Ritems != myItem){
-//                        tempArray[counter] = Ritems;
-//                        counter++;
-//                    }
-//                }
-//                myImages = tempArray;
-//                Toast.makeText(getActivity(), "Item Removed", LENGTH_SHORT).show();
-//                add = false;
-//            }
-//        }
-        //if (add){
+
             myImages.add(myItem);
             Toast.makeText(getActivity(), "Item Added", LENGTH_SHORT).show();
-        //}
 
     }
 

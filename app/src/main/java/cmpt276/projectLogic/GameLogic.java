@@ -9,7 +9,7 @@ import java.util.Random;
 public class GameLogic {
     private static Random r = new Random();
     private static int numCardsInDraw;
-    private static int gameOrder = 2;                 //SET THESE WHEN OPTIONS ARE DONE!!!
+    private static int gameOrder = optionManager.getInstance().getUserOption().get(0).getUserOrder();
 
     public GameLogic() {
     }

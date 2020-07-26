@@ -25,9 +25,16 @@
     <string name="nicknameMessage">NICKNAME MUST BE INPUTTED</string>
     <string name="discard_pile">Discard Pile</string>
     <string name="draw_pile">Draw Pile</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_selector">Images</string>
     <string name="Search">search</string>
-    >>>>>>> app/src/main/res/values/strings.xml
+    <string name="order2">ODER 2</string>
+    <string name="order3">ORDER 3</string>
+    <string name="order5">ORDER 5</string>
+    <string name="size5">PILE-SIZE:5</string>
+    <string name="size10">PILE-SIZE:10</string>
+    <string name="size15">PILE-SIZE:15</string>
+    <string name="size20">PILE-SIZE:20</string>
+    <string name="sizeAll">PILE-SIZE:\"ALL\"</string>
+     >>>>>>> app/src/main/res/values/strings.xml
 </resources>
