@@ -24,7 +24,7 @@ public class optionManager {
         return chosenOption;
     }
 
-    public void setMyOption(RadioButton chosenTheme, RadioButton fruitImgTxt, RadioButton vegImgTxt, RadioButton fruitButton, RadioButton vegeButton){
+    public void setMyOption(RadioButton chosenTheme, RadioButton fruitImgTxt, RadioButton vegImgTxt, RadioButton fruitButton, RadioButton vegeButton, RadioButton flickrButton){
         switch (chosenTheme.getId()) {
             case R.id.fruitButton:
                 userTheme = String.valueOf(fruitButton.getText());
@@ -37,6 +37,9 @@ public class optionManager {
                 break;
             case R.id.vegImgTxt:
                 userTheme = String.valueOf(vegImgTxt.getText());
+                break;
+            case R.id.flickrButton:
+                userTheme = String.valueOf(flickrButton.getText());
                 break;
         }
     }

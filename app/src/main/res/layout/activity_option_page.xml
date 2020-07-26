@@ -19,8 +19,8 @@
 
     <RadioGroup
         android:id="@+id/options"
-        android:layout_width="210dp"
-        android:layout_height="198dp"
+        android:layout_width="213dp"
+        android:layout_height="224dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -66,6 +66,17 @@
             android:layout_height="wrap_content"
             android:background="#E1F5FE"
             android:text="@string/vegImgTxt"
+            android:textColor="#1B5E20"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/flickrButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FCE4EC"
+            android:text="FLICKR"
             android:textColor="#1B5E20"
             android:textSize="36sp"
             android:textStyle="bold"

@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import cmpt276.project.R;
 import cmpt276.projectFlickr.PhotoGalleryActivity;
 import cmpt276.projectFlickr.imageEditPage;
-import cmpt276.projectFlickr.testImgPage;
 
 /**
  * start button goes to game page
@@ -43,7 +42,6 @@ public class menuPage extends AppCompatActivity {
         Button helpButton = findViewById(R.id.helpButton);
         Button imagesButton = findViewById(R.id.imagesButton);
         Button infoButton = findViewById(R.id.infoButton);
-        Button testButton = findViewById(R.id.testBtn);
 
         startButton.startAnimation(bounce);
         scoreButton.startAnimation(bounce);
@@ -91,13 +89,6 @@ public class menuPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(menuPage.this, imageEditPage.class));
-            }
-        });
-
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(menuPage.this, testImgPage.class));
             }
         });
     }
