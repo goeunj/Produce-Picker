@@ -22,8 +22,8 @@ import cmpt276.projectLogic.optionManager;
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     private RadioGroup options;
-    private RadioButton chosenButton, fruitButton, vegeButton;
-    int themeSelected;
+    private RadioButton chosenTheme, fruitImgTxt, vegImgTxt, fruitButton, vegeButton;
+    int themeSelected, typeSelected;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -54,13 +54,15 @@ public class optionPage extends AppCompatActivity {
                 options = findViewById(R.id.options);
                 fruitButton = findViewById(R.id.fruitButton);
                 vegeButton = findViewById(R.id.vegeButton);
+                fruitImgTxt = findViewById(R.id.fruitImgTxt);
+                vegImgTxt = findViewById(R.id.vegImgTxt);
                 themeSelected = options.getCheckedRadioButtonId();
 
-                if(themeSelected == -1){
+                if(themeSelected == -1 || typeSelected == -1){
                     Toast.makeText(getApplicationContext(), getString(R.string.optionMessage), Toast.LENGTH_SHORT).show();
                 }else{
-                    chosenButton = findViewById(themeSelected);
-                    manager.setMyOption(chosenButton, fruitButton, vegeButton);
+                    chosenTheme = findViewById(themeSelected);
+                    manager.setMyOption(chosenTheme, fruitImgTxt, vegImgTxt, fruitButton, vegeButton);
 
                     startActivity(new Intent(optionPage.this, menuPage.class));
                 }

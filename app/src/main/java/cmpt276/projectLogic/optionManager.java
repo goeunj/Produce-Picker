@@ -10,11 +10,11 @@ import cmpt276.project.R;
  */
 
 public class optionManager {
-    private String myOption;
+    private String userTheme;
     private static optionManager chosenOption;
 
     private optionManager(){
-        myOption = "FRUITS";
+        userTheme = "FRUITS";
     }
 
     public static optionManager getInstance(){
@@ -24,18 +24,24 @@ public class optionManager {
         return chosenOption;
     }
 
-    public void setMyOption(RadioButton chosenButton, RadioButton fruitButton, RadioButton vegeButton){
-        switch (chosenButton.getId()) {
+    public void setMyOption(RadioButton chosenTheme, RadioButton fruitImgTxt, RadioButton vegImgTxt, RadioButton fruitButton, RadioButton vegeButton){
+        switch (chosenTheme.getId()) {
             case R.id.fruitButton:
-                myOption = String.valueOf(fruitButton.getText());
+                userTheme = String.valueOf(fruitButton.getText());
                 break;
             case R.id.vegeButton:
-                myOption = String.valueOf(vegeButton.getText());
+                userTheme = String.valueOf(vegeButton.getText());
+                break;
+            case R.id.fruitImgTxt:
+                userTheme = String.valueOf(fruitImgTxt.getText());
+                break;
+            case R.id.vegImgTxt:
+                userTheme = String.valueOf(vegImgTxt.getText());
                 break;
         }
     }
 
-    public String getMyOption(){
-        return this.myOption;
+    public String getUserTheme(){
+        return this.userTheme;
     }
 }

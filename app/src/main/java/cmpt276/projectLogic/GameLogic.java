@@ -3,7 +3,8 @@ package cmpt276.projectLogic;
 import java.util.Random;
 
 /**
- * Class for the backend logic of the game. Functions to get random cards each game and to determine a match
+ * Class for the backend logic of the game
+ * Functions to get random cards each game and to determine a match
  */
 public class GameLogic {
     private static Random r = new Random();
@@ -67,5 +68,16 @@ public class GameLogic {
                 throw new IllegalStateException("Not a valid card " + cardNum);
         }
         return card;
+    }
+
+    public static String[] getImageOrText(String[] Image, String[] ImgTxt){         //randomly chooses Image or ImgTxt
+        Random r = new Random();
+        int index = r.nextInt(2);
+
+        if (index == 0) {
+            return Image;
+        } else{
+            return ImgTxt;
+        }
     }
 }

@@ -8,6 +8,8 @@
     <string name="helpButton">HELP</string>
     <string name="fruitButton">FRUITS</string>
     <string name="vegeButton">VEGGIES</string>
+    <string name="fruitImgTxt">FRUITS+TEXT</string>
+    <string name="vegImgTxt">VEGGIES+TEXT</string>
     <string name="optionMessage">OPTION MUST BE SELECTED TO SET</string>
     <string name="setButton">SET</string>
     <string name="rules_title">Rules</string>
@@ -23,5 +25,9 @@
     <string name="nicknameMessage">NICKNAME MUST BE INPUTTED</string>
     <string name="discard_pile">Discard Pile</string>
     <string name="draw_pile">Draw Pile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_selector">Images</string>
+    <string name="Search">search</string>
     >>>>>>> app/src/main/res/values/strings.xml
 </resources>
