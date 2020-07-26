@@ -23,10 +23,10 @@
         android:layout_height="129dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143">
+        app:layout_constraintVertical_bias="0.202">
 
         <RadioButton
             android:id="@+id/fruitButton"
@@ -94,13 +94,13 @@
 
     <RadioGroup
         android:id="@+id/order"
-        android:layout_width="107dp"
-        android:layout_height="97dp"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/pileSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/options"
-        app:layout_constraintVertical_bias="0.588">
+        app:layout_constraintVertical_bias="0.466">
 
         <RadioButton
             android:id="@+id/order2"
@@ -138,13 +138,13 @@
 
     <RadioGroup
         android:id="@+id/pileSize"
-        android:layout_width="175dp"
-        android:layout_height="160dp"
+        android:layout_width="173dp"
+        android:layout_height="161dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68">
+        app:layout_constraintVertical_bias="0.628">
 
         <RadioButton
             android:id="@+id/size5"
