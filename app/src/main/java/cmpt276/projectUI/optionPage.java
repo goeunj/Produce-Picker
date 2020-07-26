@@ -17,14 +17,15 @@ import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
 
 /**
- * user can choose to have fruit or vegetable theme
+ * user can choose to have fruit or vegetable theme, order, pile size
  */
 
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
-    private RadioGroup options;
-    private RadioButton chosenTheme, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrButton;
-    int themeSelected, typeSelected;
+    RadioGroup options, order, pileSize;
+    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt;
+    RadioButton order2, order3, order5, size5, size10, size15, size20, sizeAll;
+    int themeSelected, orderSelected, sizeSelected;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -60,13 +61,28 @@ public class optionPage extends AppCompatActivity {
                 flickrButton = findViewById(R.id.flickrButton);
                 themeSelected = options.getCheckedRadioButtonId();
 
-                if(themeSelected == -1 || typeSelected == -1){
-                    Toast.makeText(getApplicationContext(), getString(R.string.optionMessage), Toast.LENGTH_SHORT).show();
-                }else{
-                    chosenTheme = findViewById(themeSelected);
-                    manager.setMyOption(chosenTheme, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrButton);
+                order = findViewById(R.id.order);
+                order2 = findViewById(R.id.order2);
+                order3 = findViewById(R.id.order3);
+                order5= findViewById(R.id.order5);
+                orderSelected = order.getCheckedRadioButtonId();
+
+                pileSize = findViewById(R.id.pileSize);
+                size5 = findViewById(R.id.size5);
+                size10 = findViewById(R.id.size10);
+                size15 = findViewById(R.id.size15);
+                size20 = findViewById(R.id.size20);
+                sizeAll = findViewById(R.id.sizeAll);
+                sizeSelected = pileSize.getCheckedRadioButtonId();
+
+                if(themeSelected != -1 && orderSelected != -1 && sizeSelected != -1){
+                    manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton);
+                    manager.setMyOrder(orderSelected);
+                    manager.setMySize(sizeSelected);
 
                     startActivity(new Intent(optionPage.this, menuPage.class));
+                }else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.optionMessage), Toast.LENGTH_SHORT).show();
                 }
             }
         });

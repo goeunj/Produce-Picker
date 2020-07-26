@@ -47,15 +47,15 @@ import static cmpt276.projectFlickr.ImagesArray.myImages;
  */
 
 public class gamePage extends AppCompatActivity {
-    private optionManager option = optionManager.getInstance();
+    private optionManager manager = optionManager.getInstance();
     Chronometer time;
     ArrayList<String[]> drawCardType;
     int score, count =0;
     int[] myCard, discard, cards;
     int cardCount = 7;           //UPDATE TO OPTIONS SINGLETON
-    int gameOrder = 2;             //CHANGE WHEN OPTIONS DONE
+    int gameOrder;
     int images;
-    int numCards = 7;             //CHANGE WHEN OPTIONS DONE
+    int numCards;
     String[] Image, ImgTxt, cardType;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
@@ -87,6 +87,11 @@ public class gamePage extends AppCompatActivity {
 
 
         drawCardType = new ArrayList<>();
+        getUserTheme();
+        gameOrder = manager.getUserOption().get(0).getUserOrder();
+        numCards = manager.getUserOption().get(0).getUserPileSize();
+        count = 0;
+
         if(gameOrder == 2) {
             cards = new int[]{0, 1, 2, 3, 4, 5, 6};
             images = 3;
@@ -135,8 +140,8 @@ public class gamePage extends AppCompatActivity {
         }
     }
 
-    private void getUserOption(){
-        switch (option.getUserTheme()) {
+    private void getUserTheme(){
+        switch (manager.getUserOption().get(0).getUserTheme()) {
             case "FRUITS":
                 Image = Fruit;
                 cardType = Image;
@@ -191,7 +196,7 @@ public class gamePage extends AppCompatActivity {
 
         for (int i = 0; i < images; i++) {
 
-            if (option.getUserTheme().equals("FRUITS+TEXT") || option.getUserTheme().equals("VEGGIES+TEXT")){
+            if (manager.getUserOption().get(0).getUserTheme().equals("FRUITS+TEXT") || manager.getUserOption().get(0).getUserTheme().equals("VEGGIES+TEXT")){
                 if (position.equals("Draw") || count == 0){
                     cardType = GameLogic.getImageOrText(Image, ImgTxt);
                     if (cardType == Image) {
@@ -199,9 +204,9 @@ public class gamePage extends AppCompatActivity {
                     } else if (cardType == ImgTxt) {
                         TextCount++;
                     }
-                    if (ImageCount == 2) {
+                    if (ImageCount == images-1) {
                         cardType = ImgTxt;
-                    } else if (TextCount == 2) {
+                    } else if (TextCount == images-1) {
                         cardType = Image;
                     }
                     //keeps track of the cardType on draw card pile to make cardType on discard pile the same when user card is 'moved'
