@@ -22,8 +22,8 @@
 
     <TableLayout
         android:id="@+id/tblDraw"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="397dp"
+        android:layout_height="102dp"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +34,8 @@
 
     <TableLayout
         android:id="@+id/tblDiscard"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="400dp"
+        android:layout_height="103dp"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -28,7 +28,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_selector">Images</string>
     <string name="Search">search</string>
-    <string name="order2">ODER 2</string>
+    <string name="order2">ORDER 2</string>
     <string name="order3">ORDER 3</string>
     <string name="order5">ORDER 5</string>
     <string name="size5">PILE-SIZE:5</string>
@@ -36,5 +36,6 @@
     <string name="size15">PILE-SIZE:15</string>
     <string name="size20">PILE-SIZE:20</string>
     <string name="sizeAll">PILE-SIZE:\"ALL\"</string>
+    <string name="sizeWarning">Please select a valid pile size</string>
      >>>>>>> app/src/main/res/values/strings.xml
 </resources>

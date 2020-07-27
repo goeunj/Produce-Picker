@@ -15,6 +15,7 @@ import cmpt276.project.R;
 public class optionManager {
     private ArrayList<option> userOption = new ArrayList<>();
     private static optionManager chosenOption;
+    int wrongSize;
 
     private optionManager(){
         userOption.add(0, new option("FRUITS", 2, 7));
