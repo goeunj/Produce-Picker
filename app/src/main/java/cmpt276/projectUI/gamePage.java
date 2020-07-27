@@ -52,7 +52,6 @@ public class gamePage extends AppCompatActivity {
     ArrayList<String[]> drawCardType;
     int score, count =0;
     int[] myCard, discard, cards;
-    int cardCount = 7;           //UPDATE TO OPTIONS SINGLETON
     int gameOrder;
     int images;
     int numCards;
