@@ -1,5 +1,7 @@
 package cmpt276.projectFlickr;
-
+/*
+ The class for a Gallery item, the object that will be used to store the image data
+ */
 public class GalleryItem {
     private String mCaption;
     private String mId;

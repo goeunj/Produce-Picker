@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/*
+    The class that will allow us to show a thumbnail in the gallery.
+    The fragments reference this class to make the thumbnail from the URL
+ */
 public class ThumbnailDownloader<T> extends HandlerThread {
     private static final String TAG = "ThumbnailDownloader";
     private static final int MESSAGE_DOWNLOAD = 0;

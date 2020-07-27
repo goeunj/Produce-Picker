@@ -21,6 +21,11 @@ import cmpt276.project.R;
 
 import static cmpt276.projectFlickr.ImagesArray.myImages;
 
+/*
+    This fragment allows users to removes images by clicking on them,
+    it then refreshes the page to show the updates list.
+ */
+
 public class imageEditFragment extends Fragment implements OnNoteListener {
         private static final String TAG = "imageEditFragment";
 

@@ -29,6 +29,11 @@ import cmpt276.project.R;
 import static android.widget.Toast.LENGTH_SHORT;
 import static cmpt276.projectFlickr.ImagesArray.myImages;
 
+/*
+    The Fragment for the Photo Gallery Activity. This will run the major components
+    for the gallery shown in the flickr implementation.
+    The onClick listener is also implemented to also the user to add an image to their list.
+ */
 public class PhotoGalleryFragment extends Fragment implements OnNoteListener {
     private static final String TAG = "PhotoGalleryFragment";
 

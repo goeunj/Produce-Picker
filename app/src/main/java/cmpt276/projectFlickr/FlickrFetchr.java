@@ -15,6 +15,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    The Class used to pull from flickr. We will get the urls and find the recent/searched images to show.
+ */
+
 public class FlickrFetchr {
     private static final String TAG = "FlickrFetchr";
 

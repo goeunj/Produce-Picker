@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentManager;
 
 import cmpt276.project.R;
 
+/*
+    The base class to load the fragment
+ */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
