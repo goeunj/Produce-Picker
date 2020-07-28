@@ -37,5 +37,8 @@
     <string name="size20">PILE-SIZE:20</string>
     <string name="sizeAll">PILE-SIZE:\"ALL\"</string>
     <string name="sizeWarning">Please select a valid pile size</string>
-     >>>>>>> app/src/main/res/values/strings.xml
+    <string name="match">Match!</string>
+    <string name="noMatch">No Match</string>
+    <string name="FLICKR">FLICKR</string>
+    >>>>>>> app/src/main/res/values/strings.xml
 </resources>

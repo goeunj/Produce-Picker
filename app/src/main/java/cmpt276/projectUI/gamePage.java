@@ -50,11 +50,10 @@ public class gamePage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     Chronometer time;
     ArrayList<String[]> drawCardType;
-    int score, count =0;
+    int score, count=0;
+    int gameOrder, images, numCards;
+    int ImageCount , TextCount;
     int[] myCard, discard, cards;
-    int gameOrder;
-    int images;
-    int numCards;
     String[] Image, ImgTxt, cardType;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
@@ -79,16 +78,13 @@ public class gamePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_page);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         drawCardType = new ArrayList<>();
         getUserTheme();
-        gameOrder = manager.getUserOption().get(0).getUserOrder();
-        numCards = manager.getUserOption().get(0).getUserPileSize();
+        gameOrder = manager.getUserOrder(0);
+        numCards = manager.getUserSize(0);
         count = 0;
 
         if(gameOrder == 2) {
@@ -103,8 +99,7 @@ public class gamePage extends AppCompatActivity {
             cards = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
             images = 6;
         }
-        count = 0;
-        if (manager.getUserOption().get(0).getUserTheme().equals("FLICKR")){
+        if (manager.getUserTheme(0).equals("FLICKR")){
             if (myImages.size() < cards.length){
                 Toast.makeText(getApplicationContext(), "Not enough images in Flickr set", Toast.LENGTH_LONG).show();
                 finish();
@@ -115,7 +110,6 @@ public class gamePage extends AppCompatActivity {
         time = findViewById(R.id.time);
         time.setBase(SystemClock.elapsedRealtime());
         time.start();
-
 
         drawCard(cards);
         try {
@@ -138,7 +132,7 @@ public class gamePage extends AppCompatActivity {
     }
 
     private void getUserTheme(){
-        switch (manager.getUserOption().get(0).getUserTheme()) {
+        switch (manager.getUserTheme(0)) {
             case "FRUITS":
                 Image = Fruit;
                 cardType = Image;
@@ -158,8 +152,21 @@ public class gamePage extends AppCompatActivity {
             case "FLICKR":
                 Image = flickr;
                 cardType = Image;
-
         }
+    }
+
+    private String[] setLastCardType(String[] cardType, String[] Image, String[] ImgTxt, int images){
+        if (cardType == Image) {
+            ImageCount++;
+        } else if (cardType == ImgTxt) {
+            TextCount++;
+        }
+        if (ImageCount == images-1) {
+            cardType = ImgTxt;
+        } else if (TextCount == images-1) {
+            cardType = Image;
+        }
+        return cardType;
     }
 
     private void drawCard(int[] cards){
@@ -169,8 +176,10 @@ public class gamePage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateCard(String position) throws IOException {
-        int ImageCount = 0, TextCount = 0;
         TableLayout table = null;
+        Bitmap bitmap;
+        ImageCount = 0;
+        TextCount = 0;
 
         if (position.equals("Discard")){
             table = findViewById(R.id.tblDiscard);
@@ -192,20 +201,11 @@ public class gamePage extends AppCompatActivity {
         table.addView(tableRow);
 
         for (int i = 0; i < images; i++) {
-
-            if (manager.getUserOption().get(0).getUserTheme().equals("FRUITS+TEXT") || manager.getUserOption().get(0).getUserTheme().equals("VEGGIES+TEXT")){
+            if (manager.getUserTheme(0).equals(getString(R.string.fruitImgTxt)) || manager.getUserTheme(0).equals(getString(R.string.vegImgTxt))){
                 if (position.equals("Draw") || count == 0){
                     cardType = GameLogic.getImageOrText(Image, ImgTxt);
-                    if (cardType == Image) {
-                        ImageCount++;
-                    } else if (cardType == ImgTxt) {
-                        TextCount++;
-                    }
-                    if (ImageCount == images-1) {
-                        cardType = ImgTxt;
-                    } else if (TextCount == images-1) {
-                        cardType = Image;
-                    }
+                    cardType = setLastCardType(cardType, Image, ImgTxt, images);
+
                     //keeps track of the cardType on draw card pile to make cardType on discard pile the same when user card is 'moved'
                     drawCardType.add(i, cardType);
                 }else if (count > 0){
@@ -220,9 +220,8 @@ public class gamePage extends AppCompatActivity {
                     TableRow.LayoutParams.MATCH_PARENT,
                     1.0f));
             button.setPadding(0, 0, 0, 0);
-            Bitmap bitmap = null;
 
-            if (manager.getUserOption().get(0).getUserTheme().equals("FLICKR")){
+            if (manager.getUserTheme(0).equals(getString(R.string.FLICKR))){
                 InputStream input = new java.net.URL(myImages.get(myCard[i]).getUrl()).openStream();
                 bitmap = BitmapFactory.decodeStream(input);
             }
@@ -263,7 +262,7 @@ public class gamePage extends AppCompatActivity {
                 setMessage();
                 return;
             }
-            Toast.makeText(getApplicationContext(), "MATCH!", LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.match), LENGTH_SHORT).show();
             populateCard("Discard");
             discard = myCard;
             drawCard(cards);
@@ -271,7 +270,7 @@ public class gamePage extends AppCompatActivity {
             populateCard("Draw");
         }
         else{
-            Toast.makeText(getApplicationContext(), "No Match", LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.noMatch), LENGTH_SHORT).show();
         }
     }
 

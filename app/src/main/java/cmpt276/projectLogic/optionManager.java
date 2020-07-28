@@ -87,7 +87,15 @@ public class optionManager {
         }
     }
 
-    public ArrayList<option> getUserOption(){
-        return this.userOption;
+    public String getUserTheme(int i){
+        return this.userOption.get(i).getUserTheme();
+    }
+
+    public int getUserOrder(int i){
+        return this.userOption.get(i).getUserOrder();
+    }
+
+    public int getUserSize(int i){
+        return this.userOption.get(i).getUserPileSize();
     }
 }

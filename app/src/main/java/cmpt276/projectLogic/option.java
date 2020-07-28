@@ -18,21 +18,21 @@ public class option {
     void setUserTheme(String theme){
         this.userTheme = theme;
     }
-    public String getUserTheme(){
+    String getUserTheme(){
         return this.userTheme;
     }
 
     void setUserOrder(int order){
         this.userOrder = order;
     }
-    public int getUserOrder(){
+    int getUserOrder(){
         return this.userOrder;
     }
 
     void setUSerPileSize(int size){
         this.userPileSize = size;
     }
-    public int getUserPileSize(){
+    int getUserPileSize(){
         return this.userPileSize;
     }
 }

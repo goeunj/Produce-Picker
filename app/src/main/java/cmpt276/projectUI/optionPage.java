@@ -83,8 +83,8 @@ public class optionPage extends AppCompatActivity {
                     manager.setMyOrder(orderSelected);
                     manager.setMySize(sizeSelected);
 
-                    orderCompare = compareManager.getUserOption().get(0).getUserOrder();
-                    sizeCompare = compareManager.getUserOption().get(0).getUserPileSize();
+                    orderCompare = compareManager.getUserOrder(0);
+                    sizeCompare = compareManager.getUserSize(0);
 
                     if(orderCompare == 2 && (sizeCompare == 5 || sizeCompare == 7)){
                         notValid = false;

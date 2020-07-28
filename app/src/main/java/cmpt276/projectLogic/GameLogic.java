@@ -8,8 +8,7 @@ import java.util.Random;
  */
 public class GameLogic {
     private static Random r = new Random();
-    private static int numCardsInDraw;
-    private static int gameOrder = optionManager.getInstance().getUserOption().get(0).getUserOrder();
+    private static int gameOrder = optionManager.getInstance().getUserOrder(0);
 
     public GameLogic() {
     }
@@ -118,25 +117,6 @@ public class GameLogic {
         }
 
         return card;
-    }
-
-    public static int isDrawSizePossible(int order, int drawSize){    //-1 == not possible; 1 == possible
-        if(order == 2){
-            if(drawSize != 5){
-                return -1;
-            }
-            return 1;
-        }
-        if(order == 3){
-            if(drawSize == 5 || drawSize == 10){
-                return 1;
-            }
-            return -1;
-        }
-        if(order == 5){
-            return -1;
-        }
-        return 0;
     }
 
     public static String[] getImageOrText(String[] Image, String[] ImgTxt){         //randomly chooses Image or ImgTxt
