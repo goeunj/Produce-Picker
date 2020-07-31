@@ -1,6 +1,9 @@
 package cmpt276.projectUI;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,13 +20,14 @@ import cmpt276.projectFlickr.PhotoGalleryActivity;
 import cmpt276.projectFlickr.imageEditPage;
 
 /**
- * start button goes to game page
- * score button goes to score page
- * option button goes to option page
- * help button goes to help page
+ * start start_game goes to game page
+ * score start_game goes to score page
+ * option start_game goes to option page
+ * help start_game goes to help page
  */
 
 public class menuPage extends AppCompatActivity {
+    MediaPlayer buttonSound;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -32,18 +36,6 @@ public class menuPage extends AppCompatActivity {
         setContentView(R.layout.activity_menu_page);
 
         setButtons();
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        startService(new Intent(menuPage.this, song.class).setAction("PLAY"));
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        startService(new Intent(menuPage.this, song.class).setAction("PAUSE"));
     }
 
     @Override
@@ -72,6 +64,8 @@ public class menuPage extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, gamePage.class));
             }
         });
@@ -79,6 +73,8 @@ public class menuPage extends AppCompatActivity {
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, scorePage.class));
             }
         });
@@ -86,6 +82,8 @@ public class menuPage extends AppCompatActivity {
         optionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, optionPage.class));
             }
         });
@@ -93,6 +91,8 @@ public class menuPage extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, helpPage.class));
             }
         });
@@ -100,6 +100,8 @@ public class menuPage extends AppCompatActivity {
         imagesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, PhotoGalleryActivity.class));
             }
         });
@@ -107,6 +109,8 @@ public class menuPage extends AppCompatActivity {
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
                 startActivity(new Intent(menuPage.this, imageEditPage.class));
             }
         });

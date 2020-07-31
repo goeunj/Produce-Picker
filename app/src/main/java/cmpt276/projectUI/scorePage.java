@@ -52,18 +52,6 @@ public class scorePage extends AppCompatActivity {
         setResetButton();
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        startService(new Intent(scorePage.this, song.class).setAction("PLAY"));
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        startService(new Intent(scorePage.this, song.class).setAction("PAUSE"));
-    }
-
     private void saveScoreList(){
         sharedPref = getSharedPreferences("sharePref", MODE_PRIVATE);
         Gson gson = new Gson();

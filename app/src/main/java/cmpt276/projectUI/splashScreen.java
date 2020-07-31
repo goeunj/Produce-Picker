@@ -64,10 +64,4 @@ public class splashScreen extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        startService(new Intent(splashScreen.this, song.class).setAction("PLAY"));
-    }
 }

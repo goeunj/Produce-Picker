@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class gamePage extends AppCompatActivity {
     int ImageCount , TextCount;
     int[] myCard, discard, cards;
     String[] Image, ImgTxt, cardType;
+    MediaPlayer winSong;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
             "elderberry", "fig", "grape", "grapefruit", "guava", "kiwi", "kumquat", "lemon", "lime", "lychee", "mango", "papaya",
@@ -325,12 +327,20 @@ public class gamePage extends AppCompatActivity {
 
         setAddButton(addButton, cancelButton, nickname, winMessage, date);
         setCancelButton(cancelButton, addButton, nickname, winMessage);
+
+        startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
+        winSong = MediaPlayer.create(getApplicationContext(), R.raw.win);
+        winSong.seekTo(0);
+        winSong.start();
     }
 
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                winSong.pause();
+                startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+
                 String name = nickname.getText().toString();
 
                 if (name.isEmpty()) {
@@ -355,6 +365,9 @@ public class gamePage extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                winSong.pause();
+                startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+
                 nickname.setVisibility(View.INVISIBLE);
                 addButton.setVisibility(View.INVISIBLE);
                 cancelButton.setVisibility(View.INVISIBLE);

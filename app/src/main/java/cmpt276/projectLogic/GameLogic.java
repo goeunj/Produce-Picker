@@ -12,7 +12,7 @@ public class GameLogic {
     public GameLogic() {
     }
 
-    public static boolean isThereAMatch(int selection, int[] discardArray){        //param1 = button selected; param2 = buttons on discard card
+    public static boolean isThereAMatch(int selection, int[] discardArray){        //param1 = start_game selected; param2 = buttons on discard card
 
         for (int value : discardArray) {
             if (selection == value) {

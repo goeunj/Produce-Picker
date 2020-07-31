@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 
 /*
     Launches the fragment for the Photo Gallery.
-    Also has a condition if the user clicks the back button, just to see if they want to.
+    Also has a condition if the user clicks the back start_game, just to see if they want to.
     This check was implemented because I (Jacob) kept accidentally clicking back, so I thought others would too.
  */
 public class PhotoGalleryActivity extends SingleFragmentActivity {

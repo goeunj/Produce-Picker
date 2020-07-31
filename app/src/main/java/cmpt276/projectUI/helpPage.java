@@ -23,18 +23,6 @@ public class helpPage extends AppCompatActivity {
         setBackButton();
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        startService(new Intent(helpPage.this, song.class).setAction("PLAY"));
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        startService(new Intent(helpPage.this, song.class).setAction("PAUSE"));
-    }
-
     private void setBackButton() {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {

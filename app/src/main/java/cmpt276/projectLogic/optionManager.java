@@ -8,7 +8,7 @@ import cmpt276.project.R;
 
 /**
  * default option is fruits
- * sets user option to radio button clicked
+ * sets user option to radio start_game clicked
  * gets user choice when needed
  */
 

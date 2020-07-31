@@ -30,6 +30,7 @@ public class song extends Service {
     public void onCreate(){
         super.onCreate();
         music = MediaPlayer.create(getApplicationContext(), R.raw.song);
+        music.seekTo(3000);
         music.setLooping(true);
     }
 
