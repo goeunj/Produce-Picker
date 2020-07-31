@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import cmpt276.music.song;
 import cmpt276.project.R;
 
 /**
@@ -19,6 +21,18 @@ public class helpPage extends AppCompatActivity {
         setContentView(R.layout.activity_help_page);
 
         setBackButton();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(helpPage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(helpPage.this, song.class).setAction("PAUSE"));
     }
 
     private void setBackButton() {

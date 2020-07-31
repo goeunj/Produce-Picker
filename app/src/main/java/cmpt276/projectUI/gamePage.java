@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import cmpt276.music.song;
 import cmpt276.project.R;
 import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
@@ -128,6 +131,18 @@ public class gamePage extends AppCompatActivity {
         for (int element: cards){
             System.out.println(element);
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
     }
 
     private void getUserTheme(){
@@ -253,14 +268,24 @@ public class gamePage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void buttonClicked(int num) throws IOException {
+        final SoundPool sound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        sound.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId, 1f, 1f, 0, 0, 1);
+            }
+        });
+
         if (GameLogic.isThereAMatch(num, discard)){
             count++;
 
             if (count == numCards-1){
+                sound.load(gamePage.this, R.raw.match, 0);
                 time.stop();
                 setMessage();
                 return;
             }
+            sound.load(gamePage.this, R.raw.match, 0);
             Toast.makeText(getApplicationContext(), getString(R.string.match), LENGTH_SHORT).show();
             populateCard("Discard");
             discard = myCard;
@@ -269,6 +294,7 @@ public class gamePage extends AppCompatActivity {
             populateCard("Draw");
         }
         else{
+            sound.load(gamePage.this, R.raw.no_match, 0);
             Toast.makeText(getApplicationContext(), getString(R.string.noMatch), LENGTH_SHORT).show();
         }
     }

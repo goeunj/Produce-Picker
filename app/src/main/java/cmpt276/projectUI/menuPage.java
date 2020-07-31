@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cmpt276.music.song;
 import cmpt276.project.R;
 import cmpt276.projectFlickr.PhotoGalleryActivity;
 import cmpt276.projectFlickr.imageEditPage;
@@ -31,6 +32,24 @@ public class menuPage extends AppCompatActivity {
         setContentView(R.layout.activity_menu_page);
 
         setButtons();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(menuPage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(menuPage.this, song.class).setAction("PAUSE"));
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        startService(new Intent(menuPage.this, song.class).setAction("STOP"));
     }
 
     private void setButtons() {

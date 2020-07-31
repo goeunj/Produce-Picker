@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import cmpt276.music.song;
 import cmpt276.project.R;
 import cmpt276.projectLogic.customAdapter;
 import cmpt276.projectLogic.score;
@@ -49,6 +50,18 @@ public class scorePage extends AppCompatActivity {
         setBackButton();
         setList();
         setResetButton();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(scorePage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(scorePage.this, song.class).setAction("PAUSE"));
     }
 
     private void saveScoreList(){

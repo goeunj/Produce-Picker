@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import cmpt276.music.song;
 import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
 
@@ -38,6 +39,18 @@ public class optionPage extends AppCompatActivity {
 
         setOptionValue();
         setBackButton();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(optionPage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(optionPage.this, song.class).setAction("PAUSE"));
     }
 
     private void setBackButton() {
