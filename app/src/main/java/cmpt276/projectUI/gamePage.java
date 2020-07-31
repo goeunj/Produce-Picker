@@ -1,7 +1,6 @@
 package cmpt276.projectUI;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -317,14 +316,9 @@ public class gamePage extends AppCompatActivity {
                     winMessage.setVisibility(View.INVISIBLE);
 
                     Intent intent = new Intent(gamePage.this, scorePage.class);
-
-                    SharedPreferences preferences = getSharedPreferences("prefs", 0);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("Name", name);
-                    editor.putInt("Score", score);
-                    editor.putString("Date", date);
-                    editor.apply();
-                    scorePage.flag = true;
+                    intent.putExtra("nickname", name);
+                    intent.putExtra("score", score);
+                    intent.putExtra("date", date);
                     startActivity(intent);
                 }
             }

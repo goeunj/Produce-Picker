@@ -8,7 +8,6 @@ import java.util.Random;
  */
 public class GameLogic {
     private static Random r = new Random();
-    private static int gameOrder = optionManager.getInstance().getUserOrder(0);
 
     public GameLogic() {
     }
@@ -41,6 +40,7 @@ public class GameLogic {
     }
 
     public static int[] getCard(int cardNum){            //get card based off a random selection from nextCard
+        int gameOrder = optionManager.getInstance().getUserOrder(0);
 
         if(gameOrder != 2 && gameOrder != 3 && gameOrder != 5){
             throw new IllegalStateException("Not a valid order " + cardNum);
