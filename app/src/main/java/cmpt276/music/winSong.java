@@ -17,7 +17,7 @@ import cmpt276.project.R;
  * Music service to play background cmpt276.music
  */
 
-public class song extends Service {
+public class winSong extends Service {
     MediaPlayer music;
 
     @Nullable
@@ -29,8 +29,7 @@ public class song extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
-        music = MediaPlayer.create(getApplicationContext(), R.raw.song);
-        music.seekTo(3000);
+        music = MediaPlayer.create(getApplicationContext(), R.raw.win);
         music.setLooping(true);
     }
 
@@ -38,6 +37,7 @@ public class song extends Service {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public int onStartCommand(Intent intent, int flag, int startId){
         if (Objects.equals(intent.getAction(), "PLAY")){
+            music.seekTo(0);
             music.start();
         }
 

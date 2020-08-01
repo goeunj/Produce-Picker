@@ -137,7 +137,7 @@ public class GameLogic {
     }
 
     public static int getRandomSize(){
-        int[] size = new int[]{100, 150, 200, 250, 300, 350, 400, 450, 500};
+        int[] size = new int[]{100, 235, 345, 400};
         Random r = new Random();
         return size[r.nextInt(size.length)];
     }

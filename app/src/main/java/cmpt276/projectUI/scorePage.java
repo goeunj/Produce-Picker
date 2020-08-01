@@ -52,6 +52,12 @@ public class scorePage extends AppCompatActivity {
         setResetButton();
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        startActivity(new Intent(scorePage.this, menuPage.class));
+    }
+
     private void saveScoreList(){
         sharedPref = getSharedPreferences("sharePref", MODE_PRIVATE);
         Gson gson = new Gson();

@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import cmpt276.music.song;
+import cmpt276.music.winSong;
 import cmpt276.project.R;
 import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
@@ -60,7 +60,6 @@ public class gamePage extends AppCompatActivity {
     int ImageCount , TextCount;
     int[] myCard, discard, cards;
     String[] Image, ImgTxt, cardType;
-    MediaPlayer winSong;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
             "elderberry", "fig", "grape", "grapefruit", "guava", "kiwi", "kumquat", "lemon", "lime", "lychee", "mango", "papaya",
@@ -148,6 +147,7 @@ public class gamePage extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
+        startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
     }
 
     private void getUserTheme(){
@@ -188,6 +188,16 @@ public class gamePage extends AppCompatActivity {
         return cardType;
     }
 
+    private String[] discardPileCardType(String[] cardType, String position, int index){
+        if (position.equals("Draw") || count == 0){
+            //keeps track of the cardType of draw card pile to make cardType on discard pile the same when user card is 'moved'
+            drawCardType.add(index, cardType);
+        }else if (count > 0){
+            cardType = drawCardType.get(index);
+        }
+        return cardType;
+    }
+
     private void drawCard(int[] cards){
         int cardNum = GameLogic.nextCard(cards);
         myCard  = GameLogic.getCard(cardNum);
@@ -207,6 +217,16 @@ public class gamePage extends AppCompatActivity {
     private Bitmap reSizeBitmap(Bitmap bitmap, Bitmap original, int size){
         if (manager.getUserLevel(0).equals("HARD")){
             bitmap = Bitmap.createScaledBitmap(original, size, size, true);
+        }
+        return bitmap;
+    }
+
+    private Bitmap discardPileBitmap(Bitmap bitmap, String position, int index){
+        if (position.equals("Draw") || count == 0){
+            //keeps track of the rotation and resizing of draw card pile to make card style on discard pile the same when user card is 'moved'
+            rotateResizeType.add(index, bitmap);
+        }else if (count > 0){
+            bitmap = rotateResizeType.get(index);
         }
         return bitmap;
     }
@@ -239,15 +259,10 @@ public class gamePage extends AppCompatActivity {
 
         for (int i = 0; i < images; i++) {
             if (manager.getUserTheme(0).equals(getString(R.string.fruitImgTxt)) || manager.getUserTheme(0).equals(getString(R.string.vegImgTxt))){
-                if (position.equals("Draw") || count == 0){
-                    cardType = GameLogic.getImageOrText(Image, ImgTxt);
-                    cardType = setLastCardType(cardType, Image, ImgTxt, images);
+                cardType = GameLogic.getImageOrText(Image, ImgTxt);
+                cardType = setLastCardType(cardType, Image, ImgTxt, images);
 
-                    //keeps track of the cardType on draw card pile to make cardType on discard pile the same when user card is 'moved'
-                    drawCardType.add(i, cardType);
-                }else if (count > 0){
-                    cardType = drawCardType.get(i);
-                }
+                cardType = discardPileCardType(cardType, position, i);
             }
 
             final Button button = new Button(this);
@@ -265,14 +280,11 @@ public class gamePage extends AppCompatActivity {
             else {
                 int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
                 Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
-                bitmap = Bitmap.createScaledBitmap(originalBitmap, 500, 500, true);
+                bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
                 bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
                 bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
-                if (position.equals("Draw") || count == 0){
-                    rotateResizeType.add(i, bitmap);
-                }else if (count > 0){
-                    bitmap = rotateResizeType.get(i);
-                }
+
+                bitmap = discardPileBitmap(bitmap, position, i);
             }
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, bitmap));
@@ -358,16 +370,14 @@ public class gamePage extends AppCompatActivity {
         setCancelButton(cancelButton, addButton, nickname, winMessage);
 
         startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
-        winSong = MediaPlayer.create(getApplicationContext(), R.raw.win);
-        winSong.seekTo(0);
-        winSong.start();
+        startService(new Intent(gamePage.this, winSong.class).setAction("PLAY"));
     }
 
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                winSong.pause();
+                startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
                 startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
 
                 String name = nickname.getText().toString();
@@ -394,7 +404,7 @@ public class gamePage extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                winSong.pause();
+                startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
                 startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
 
                 nickname.setVisibility(View.INVISIBLE);
