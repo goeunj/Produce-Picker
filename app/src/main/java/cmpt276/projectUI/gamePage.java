@@ -1,11 +1,13 @@
 package cmpt276.projectUI;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -29,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import cmpt276.music.song;
+import cmpt276.music.winSong;
 import cmpt276.project.R;
 import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
@@ -50,6 +54,7 @@ public class gamePage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     Chronometer time;
     ArrayList<String[]> drawCardType;
+    ArrayList<Bitmap> rotateResizeType;
     int score, count=0;
     int gameOrder, images, numCards;
     int ImageCount , TextCount;
@@ -82,6 +87,7 @@ public class gamePage extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         drawCardType = new ArrayList<>();
+        rotateResizeType = new ArrayList<>();
         getUserTheme();
         gameOrder = manager.getUserOrder(0);
         numCards = manager.getUserSize(0);
@@ -131,6 +137,19 @@ public class gamePage extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
+        startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
+    }
+
     private void getUserTheme(){
         switch (manager.getUserTheme(0)) {
             case "FRUITS":
@@ -169,9 +188,47 @@ public class gamePage extends AppCompatActivity {
         return cardType;
     }
 
+    private String[] discardPileCardType(String[] cardType, String position, int index){
+        if (position.equals("Draw") || count == 0){
+            //keeps track of the cardType of draw card pile to make cardType on discard pile the same when user card is 'moved'
+            drawCardType.add(index, cardType);
+        }else if (count > 0){
+            cardType = drawCardType.get(index);
+        }
+        return cardType;
+    }
+
     private void drawCard(int[] cards){
         int cardNum = GameLogic.nextCard(cards);
         myCard  = GameLogic.getCard(cardNum);
+    }
+
+    private Bitmap rotateBitmap(Bitmap bitmap, int degree){
+        if (manager.getUserLevel(0).equals("MEDIUM") || manager.getUserLevel(0).equals("HARD")) {
+            Matrix matrix = new Matrix();
+            matrix.preRotate(degree);
+            Bitmap rotatedBitMap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap.recycle();
+            return rotatedBitMap;
+        }
+        return bitmap;
+    }
+
+    private Bitmap reSizeBitmap(Bitmap bitmap, Bitmap original, int size){
+        if (manager.getUserLevel(0).equals("HARD")){
+            bitmap = Bitmap.createScaledBitmap(original, size, size, true);
+        }
+        return bitmap;
+    }
+
+    private Bitmap discardPileBitmap(Bitmap bitmap, String position, int index){
+        if (position.equals("Draw") || count == 0){
+            //keeps track of the rotation and resizing of draw card pile to make card style on discard pile the same when user card is 'moved'
+            rotateResizeType.add(index, bitmap);
+        }else if (count > 0){
+            bitmap = rotateResizeType.get(index);
+        }
+        return bitmap;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -202,15 +259,10 @@ public class gamePage extends AppCompatActivity {
 
         for (int i = 0; i < images; i++) {
             if (manager.getUserTheme(0).equals(getString(R.string.fruitImgTxt)) || manager.getUserTheme(0).equals(getString(R.string.vegImgTxt))){
-                if (position.equals("Draw") || count == 0){
-                    cardType = GameLogic.getImageOrText(Image, ImgTxt);
-                    cardType = setLastCardType(cardType, Image, ImgTxt, images);
+                cardType = GameLogic.getImageOrText(Image, ImgTxt);
+                cardType = setLastCardType(cardType, Image, ImgTxt, images);
 
-                    //keeps track of the cardType on draw card pile to make cardType on discard pile the same when user card is 'moved'
-                    drawCardType.add(i, cardType);
-                }else if (count > 0){
-                    cardType = drawCardType.get(i);
-                }
+                cardType = discardPileCardType(cardType, position, i);
             }
 
             final Button button = new Button(this);
@@ -228,7 +280,11 @@ public class gamePage extends AppCompatActivity {
             else {
                 int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
                 Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
-                bitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
+                bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
+                bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
+                bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
+
+                bitmap = discardPileBitmap(bitmap, position, i);
             }
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, bitmap));
@@ -254,22 +310,34 @@ public class gamePage extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void buttonClicked(int num) throws IOException {
+        final SoundPool sound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        sound.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(sampleId, 1f, 1f, 0, 0, 1);
+            }
+        });
+
         if (GameLogic.isThereAMatch(num, discard)){
             count++;
 
             if (count == numCards-1){
+                sound.load(gamePage.this, R.raw.match, 0);
                 time.stop();
                 setMessage();
                 return;
             }
+            sound.load(gamePage.this, R.raw.match, 0);
             Toast.makeText(getApplicationContext(), getString(R.string.match), LENGTH_SHORT).show();
             populateCard("Discard");
             discard = myCard;
             drawCard(cards);
             drawCardType.clear();
+            rotateResizeType.clear();
             populateCard("Draw");
         }
         else{
+            sound.load(gamePage.this, R.raw.no_match, 0);
             Toast.makeText(getApplicationContext(), getString(R.string.noMatch), LENGTH_SHORT).show();
         }
     }
@@ -300,12 +368,18 @@ public class gamePage extends AppCompatActivity {
 
         setAddButton(addButton, cancelButton, nickname, winMessage, date);
         setCancelButton(cancelButton, addButton, nickname, winMessage);
+
+        startService(new Intent(gamePage.this, song.class).setAction("PAUSE"));
+        startService(new Intent(gamePage.this, winSong.class).setAction("PLAY"));
     }
 
     public void setAddButton(final Button addButton, final Button cancelButton, final EditText nickname, final TextView winMessage, final String date){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
+                startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+
                 String name = nickname.getText().toString();
 
                 if (name.isEmpty()) {
@@ -317,14 +391,9 @@ public class gamePage extends AppCompatActivity {
                     winMessage.setVisibility(View.INVISIBLE);
 
                     Intent intent = new Intent(gamePage.this, scorePage.class);
-
-                    SharedPreferences preferences = getSharedPreferences("prefs", 0);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("Name", name);
-                    editor.putInt("Score", score);
-                    editor.putString("Date", date);
-                    editor.apply();
-                    scorePage.flag = true;
+                    intent.putExtra("nickname", name);
+                    intent.putExtra("score", score);
+                    intent.putExtra("date", date);
                     startActivity(intent);
                 }
             }
@@ -335,6 +404,9 @@ public class gamePage extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startService(new Intent(gamePage.this, winSong.class).setAction("PAUSE"));
+                startService(new Intent(gamePage.this, song.class).setAction("PLAY"));
+
                 nickname.setVisibility(View.INVISIBLE);
                 addButton.setVisibility(View.INVISIBLE);
                 cancelButton.setVisibility(View.INVISIBLE);

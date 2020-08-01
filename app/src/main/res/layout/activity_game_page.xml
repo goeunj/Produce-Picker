@@ -11,19 +11,20 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:textColor="#1B5E20"
         android:textSize="36sp"
         android:textStyle="bold"
         app:fontFamily="@font/chicle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:id="@+id/tblDraw"
-        android:layout_width="397dp"
-        android:layout_height="102dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +35,8 @@
 
     <TableLayout
         android:id="@+id/tblDiscard"
-        android:layout_width="400dp"
-        android:layout_height="103dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,10 +65,8 @@
         android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginRight="106dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginRight="104dp"
         android:ems="10"
         android:hint="@string/nicknameHint"
         android:inputType="textPersonName"
@@ -77,15 +76,14 @@
         app:fontFamily="@font/chicle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill" />
 
     <TextView
         android:id="@+id/winMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:shadowColor="#80CBC4"
         android:shadowRadius="25"
         android:text="@string/winMessage"
@@ -96,6 +94,7 @@
         app:fontFamily="@font/chicle"
         app:layout_constraintBottom_toTopOf="@+id/nickname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -112,48 +111,30 @@
         app:layout_constraintStart_toEndOf="@+id/nickname"
         app:layout_constraintTop_toBottomOf="@+id/addButton" />
 
-    <Button
-        android:id="@+id/backToMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFFDE7"
-        android:text="@string/backToMenu"
-        android:textColor="#1B5E20"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:fontFamily="@font/chicle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winMessage"
-        app:layout_constraintVertical_bias="0.062" />
-
     <TextView
         android:id="@+id/txtDiscard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginLeft="144dp"
         android:layout_marginBottom="12dp"
         android:text="@string/discard_pile"
         android:textSize="30sp"
         app:fontFamily="@font/chicle"
         app:layout_constraintBottom_toTopOf="@+id/tblDiscard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtDraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
         android:layout_marginBottom="12dp"
         android:text="@string/draw_pile"
         android:textSize="30sp"
         app:fontFamily="@font/chicle"
         app:layout_constraintBottom_toTopOf="@+id/tblDraw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

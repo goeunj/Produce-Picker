@@ -8,12 +8,11 @@ import java.util.Random;
  */
 public class GameLogic {
     private static Random r = new Random();
-    private static int gameOrder = optionManager.getInstance().getUserOrder(0);
 
     public GameLogic() {
     }
 
-    public static boolean isThereAMatch(int selection, int[] discardArray){        //param1 = button selected; param2 = buttons on discard card
+    public static boolean isThereAMatch(int selection, int[] discardArray){        //param1 = start_game selected; param2 = buttons on discard card
 
         for (int value : discardArray) {
             if (selection == value) {
@@ -41,6 +40,7 @@ public class GameLogic {
     }
 
     public static int[] getCard(int cardNum){            //get card based off a random selection from nextCard
+        int gameOrder = optionManager.getInstance().getUserOrder(0);
 
         if(gameOrder != 2 && gameOrder != 3 && gameOrder != 5){
             throw new IllegalStateException("Not a valid order " + cardNum);
@@ -128,5 +128,17 @@ public class GameLogic {
         } else{
             return ImgTxt;
         }
+    }
+
+    public static int getRandomDegree(){
+        int[] degrees = new int[]{0, 90, 180, 270};
+        Random r = new Random();
+        return degrees[r.nextInt(degrees.length)];
+    }
+
+    public static int getRandomSize(){
+        int[] size = new int[]{100, 235, 345, 400};
+        Random r = new Random();
+        return size[r.nextInt(size.length)];
     }
 }

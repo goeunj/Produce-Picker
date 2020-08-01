@@ -83,6 +83,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpt276.projectUI.menuPage" />
         </activity>
+        <service
+            android:name="cmpt276.music.song"
+            android:enabled="true" />
+        <service
+            android:name="cmpt276.music.winSong"
+            android:enabled="true" />
     </application>
 
 </manifest>

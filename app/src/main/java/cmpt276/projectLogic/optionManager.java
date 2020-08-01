@@ -8,7 +8,7 @@ import cmpt276.project.R;
 
 /**
  * default option is fruits
- * sets user option to radio button clicked
+ * sets user option to radio start_game clicked
  * gets user choice when needed
  */
 
@@ -17,7 +17,7 @@ public class optionManager {
     private static optionManager chosenOption;
 
     private optionManager(){
-        userOption.add(0, new option("FRUITS", 2, 7));
+        userOption.add(0, new option("FRUITS", 2,"EASY",  7));
     }
 
     public static optionManager getInstance(){
@@ -61,6 +61,20 @@ public class optionManager {
         }
     }
 
+    public void setMyLevel(int levelSelected){
+        switch (levelSelected){
+            case R.id.easy:
+                userOption.get(0).setUserLevel("EASY");
+                break;
+            case R.id.medium:
+                userOption.get(0).setUserLevel("MEDIUM");
+                break;
+            case R.id.hard:
+                userOption.get(0).setUserLevel("HARD");
+                break;
+        }
+    }
+
     public void setMySize(int sizeSelected){
         switch (sizeSelected){
             case R.id.size5:
@@ -93,6 +107,10 @@ public class optionManager {
 
     public int getUserOrder(int i){
         return this.userOption.get(i).getUserOrder();
+    }
+
+    public String getUserLevel(int i){
+        return this.userOption.get(i).getUserLevel();
     }
 
     public int getUserSize(int i){
