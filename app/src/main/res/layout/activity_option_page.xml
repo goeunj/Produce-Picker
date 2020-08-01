@@ -105,13 +105,14 @@
 
     <RadioGroup
         android:id="@+id/order"
-        android:layout_width="109dp"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/pileSize"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/options"
-        app:layout_constraintVertical_bias="0.466">
+        app:layout_constraintVertical_bias="0.615">
 
         <RadioButton
             android:id="@+id/order2"
@@ -149,13 +150,14 @@
 
     <RadioGroup
         android:id="@+id/pileSize"
-        android:layout_width="173dp"
-        android:layout_height="161dp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.628">
+        app:layout_constraintVertical_bias="0.683">
 
         <RadioButton
             android:id="@+id/size5"
@@ -207,6 +209,50 @@
             android:layout_height="wrap_content"
             android:background="#E1F5FE"
             android:text="@string/sizeAll"
+            android:textColor="#1B5E20"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/difficulty"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toEndOf="@+id/order"
+        app:layout_constraintTop_toBottomOf="@+id/options">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E1F5FE"
+            android:text="@string/easy"
+            android:textColor="#1B5E20"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FCE4EC"
+            android:text="@string/medium"
+            android:textColor="#1B5E20"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/chicle" />
+
+        <RadioButton
+            android:id="@+id/hard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E1F5FE"
+            android:text="@string/hard"
             android:textColor="#1B5E20"
             android:textSize="23sp"
             android:textStyle="bold"

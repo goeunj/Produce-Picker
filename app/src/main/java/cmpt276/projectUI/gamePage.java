@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -53,6 +54,7 @@ public class gamePage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     Chronometer time;
     ArrayList<String[]> drawCardType;
+    ArrayList<Bitmap> rotateResizeType;
     int score, count=0;
     int gameOrder, images, numCards;
     int ImageCount , TextCount;
@@ -86,6 +88,7 @@ public class gamePage extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         drawCardType = new ArrayList<>();
+        rotateResizeType = new ArrayList<>();
         getUserTheme();
         gameOrder = manager.getUserOrder(0);
         numCards = manager.getUserSize(0);
@@ -190,6 +193,24 @@ public class gamePage extends AppCompatActivity {
         myCard  = GameLogic.getCard(cardNum);
     }
 
+    private Bitmap rotateBitmap(Bitmap bitmap, int degree){
+        if (manager.getUserLevel(0).equals("MEDIUM") || manager.getUserLevel(0).equals("HARD")) {
+            Matrix matrix = new Matrix();
+            matrix.preRotate(degree);
+            Bitmap rotatedBitMap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap.recycle();
+            return rotatedBitMap;
+        }
+        return bitmap;
+    }
+
+    private Bitmap reSizeBitmap(Bitmap bitmap, Bitmap original, int size){
+        if (manager.getUserLevel(0).equals("HARD")){
+            bitmap = Bitmap.createScaledBitmap(original, size, size, true);
+        }
+        return bitmap;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateCard(String position) throws IOException {
         TableLayout table = null;
@@ -244,7 +265,14 @@ public class gamePage extends AppCompatActivity {
             else {
                 int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
                 Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
-                bitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, true);
+                bitmap = Bitmap.createScaledBitmap(originalBitmap, 500, 500, true);
+                bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
+                bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
+                if (position.equals("Draw") || count == 0){
+                    rotateResizeType.add(i, bitmap);
+                }else if (count > 0){
+                    bitmap = rotateResizeType.get(i);
+                }
             }
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, bitmap));
@@ -293,6 +321,7 @@ public class gamePage extends AppCompatActivity {
             discard = myCard;
             drawCard(cards);
             drawCardType.clear();
+            rotateResizeType.clear();
             populateCard("Draw");
         }
         else{

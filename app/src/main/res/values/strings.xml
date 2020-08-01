@@ -40,5 +40,8 @@
     <string name="match">Match!</string>
     <string name="noMatch">No Match</string>
     <string name="FLICKR">FLICKR</string>
+    <string name="easy">EASY</string>
+    <string name="medium">MEDIUM</string>
+    <string name="hard">HARD</string>
     >>>>>>> app/src/main/res/values/strings.xml
 </resources>

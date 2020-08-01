@@ -129,4 +129,16 @@ public class GameLogic {
             return ImgTxt;
         }
     }
+
+    public static int getRandomDegree(){
+        int[] degrees = new int[]{0, 90, 180, 270};
+        Random r = new Random();
+        return degrees[r.nextInt(degrees.length)];
+    }
+
+    public static int getRandomSize(){
+        int[] size = new int[]{100, 150, 200, 250, 300, 350, 400, 450, 500};
+        Random r = new Random();
+        return size[r.nextInt(size.length)];
+    }
 }

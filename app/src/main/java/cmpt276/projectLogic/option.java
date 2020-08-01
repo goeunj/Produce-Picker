@@ -7,11 +7,13 @@ package cmpt276.projectLogic;
 public class option {
     private String userTheme;
     private int userOrder;
+    private String userLevel;
     private int userPileSize;
 
-    option(String theme, int order, int size){
+    option(String theme, int order, String level, int size){
         this.userTheme = theme;
         this.userOrder = order;
+        this.userLevel = level;
         this.userPileSize = size;
     }
 
@@ -27,6 +29,13 @@ public class option {
     }
     int getUserOrder(){
         return this.userOrder;
+    }
+
+    void setUserLevel(String level){
+        this.userLevel = level;
+    }
+    String getUserLevel(){
+        return this.userLevel;
     }
 
     void setUSerPileSize(int size){
