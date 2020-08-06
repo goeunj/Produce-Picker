@@ -1,9 +1,7 @@
 package cmpt276.projectUI;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cmpt276.music.song;
 import cmpt276.project.R;
+import cmpt276.projectAndroidImg.DroidImgPage;
 import cmpt276.projectFlickr.PhotoGalleryActivity;
 import cmpt276.projectFlickr.imageEditPage;
 
@@ -53,6 +52,7 @@ public class menuPage extends AppCompatActivity {
         Button helpButton = findViewById(R.id.helpButton);
         Button imagesButton = findViewById(R.id.imagesButton);
         Button infoButton = findViewById(R.id.infoButton);
+        Button androidButton = findViewById(R.id.androidButton);
 
         startButton.startAnimation(bounce);
         scoreButton.startAnimation(bounce);
@@ -60,6 +60,7 @@ public class menuPage extends AppCompatActivity {
         helpButton.startAnimation(bounce);
         imagesButton.startAnimation(bounce);
         infoButton.startAnimation(bounce);
+        androidButton.startAnimation(bounce);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +113,15 @@ public class menuPage extends AppCompatActivity {
                 buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
                 buttonSound.start();
                 startActivity(new Intent(menuPage.this, imageEditPage.class));
+            }
+        });
+
+        androidButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonSound = MediaPlayer.create(menuPage.this, R.raw.start_game);
+                buttonSound.start();
+                startActivity(new Intent(menuPage.this, DroidImgPage.class));
             }
         });
     }

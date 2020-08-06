@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="cmpt276.projectAndroidImg.DroidImgPage"></activity>
         <activity
             android:name="cmpt276.projectFlickr.imageEditPage"
             android:label="Choose Images to Remove"
@@ -83,6 +84,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cmpt276.projectUI.menuPage" />
         </activity>
+
         <service
             android:name="cmpt276.music.song"
             android:enabled="true" />
