@@ -38,7 +38,7 @@ import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static cmpt276.projectAndroidImg.GalleryArray.myGalleryImgs;
+import static cmpt276.projectDeviceImgs.GalleryArray.deviceImgs;
 import static cmpt276.projectFlickr.ImagesArray.myImages;
 
 /**
@@ -116,7 +116,7 @@ public class gamePage extends AppCompatActivity {
             }
         }
         else if (manager.getUserTheme(0).equals("DEVICE")){
-            if (myGalleryImgs.size() < cards.length){
+            if (deviceImgs.size() < cards.length){
                 Toast.makeText(getApplicationContext(), "Not enough images in Device set", Toast.LENGTH_LONG).show();
                 finish();
                 return;
@@ -291,7 +291,7 @@ public class gamePage extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream(input);
             }
             else if (manager.getUserTheme(0).equals("DEVICE")){
-                Bitmap originalBitmap = myGalleryImgs.get(myCard[i]);
+                Bitmap originalBitmap = deviceImgs.get(myCard[i]);
                 bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
                 bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
                 bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());

@@ -1,4 +1,4 @@
-package cmpt276.projectAndroidImg;
+package cmpt276.projectDeviceImgs;
 
 import android.graphics.Bitmap;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryArray {
-    public static List<Bitmap> myGalleryImgs = new ArrayList<>();
+    public static List<Bitmap> deviceImgs = new ArrayList<>();
+
 
 }

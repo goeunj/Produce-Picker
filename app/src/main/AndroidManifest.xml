@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cmpt276.projectAndroidImg.DroidImgPage"></activity>
+        <activity android:name="cmpt276.projectDeviceImgs.deviceEditPage"></activity>
         <activity
             android:name="cmpt276.projectFlickr.imageEditPage"
             android:label="Choose Images to Remove"
