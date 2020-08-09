@@ -50,6 +50,7 @@ import cmpt276.projectLogic.GameLogic;
 import cmpt276.projectLogic.optionManager;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static cmpt276.projectDeviceImgs.GalleryArray.deviceImgs;
 import static cmpt276.projectFlickr.ImagesArray.myImages;
 
 /**
@@ -91,6 +92,8 @@ public class gamePage extends AppCompatActivity {
 
     String[] flickr = new String[31];
 
+    String[] device = new String[31];
+
     //MAKE two arrays, depending on the numbers of the card and the game mode, it accesses the array of images
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -122,6 +125,13 @@ public class gamePage extends AppCompatActivity {
         if (manager.getUserTheme(0).equals("FLICKR")){
             if (myImages.size() < cards.length){
                 Toast.makeText(getApplicationContext(), "Not enough images in Flickr set", Toast.LENGTH_LONG).show();
+                finish();
+                return;
+            }
+        }
+        else if (manager.getUserTheme(0).equals("DEVICE")){
+            if (deviceImgs.size() < cards.length){
+                Toast.makeText(getApplicationContext(), "Not enough images in Device set", Toast.LENGTH_LONG).show();
                 finish();
                 return;
             }
@@ -184,6 +194,9 @@ public class gamePage extends AppCompatActivity {
                 break;
             case "FLICKR":
                 Image = flickr;
+                cardType = Image;
+            case "DEVICE":
+                Image = device;
                 cardType = Image;
         }
     }
@@ -291,6 +304,13 @@ public class gamePage extends AppCompatActivity {
             if (manager.getUserTheme(0).equals(getString(R.string.FLICKR))){
                 InputStream input = new java.net.URL(myImages.get(myCard[i]).getUrl()).openStream();
                 bitmap = BitmapFactory.decodeStream(input);
+            }
+            else if (manager.getUserTheme(0).equals("DEVICE")){
+                Bitmap originalBitmap = deviceImgs.get(myCard[i]);
+                bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
+                bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
+                bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
+                bitmap = discardPileBitmap(bitmap, position, i);
             }
             else {
                 int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
