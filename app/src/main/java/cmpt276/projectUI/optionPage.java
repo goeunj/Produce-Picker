@@ -24,7 +24,7 @@ import cmpt276.projectLogic.optionManager;
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     RadioGroup options, order, pileSize, difficulty, downloads;
-    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrbutton;
+    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrbutton, deviceButton;
     RadioButton easy, medium, hard;
     RadioButton order2, order3, order5, size5, size10, size15, size20, sizeAll;
     RadioButton download;
