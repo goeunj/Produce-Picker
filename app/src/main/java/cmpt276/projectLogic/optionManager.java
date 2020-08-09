@@ -17,7 +17,7 @@ public class optionManager {
     private static optionManager chosenOption;
 
     private optionManager(){
-        userOption.add(0, new option("FRUITS", 2,"EASY",  7));
+        userOption.add(0, new option("FRUITS", 2,"EASY",  7, false));
     }
 
     public static optionManager getInstance(){
@@ -104,6 +104,14 @@ public class optionManager {
         }
     }
 
+    public void setMyDownload(boolean downloadSelected){
+        userOption.get(0).setUserDownload(downloadSelected);
+    }
+
+    public boolean getUserDownload(int i){
+        return this.userOption.get(i).getUserDownload();
+    }
+
     public String getUserTheme(int i){
         return this.userOption.get(i).getUserTheme();
     }
@@ -119,4 +127,8 @@ public class optionManager {
     public int getUserSize(int i){
         return this.userOption.get(i).getUserPileSize();
     }
+
+
 }
+
+
