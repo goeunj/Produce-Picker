@@ -1,6 +1,8 @@
 package cmpt276.projectUI;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
@@ -40,6 +45,7 @@ public class optionPage extends AppCompatActivity {
 
         setOptionValue();
         setBackButton();
+        verifyPermission();
     }
 
     private void setBackButton() {
@@ -126,5 +132,21 @@ public class optionPage extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void verifyPermission(){
+        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED){
+        }
+        else{
+            ActivityCompat.requestPermissions(optionPage.this, permissions, 1);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        verifyPermission();
     }
 }

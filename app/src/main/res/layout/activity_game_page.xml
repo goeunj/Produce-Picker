@@ -97,6 +97,24 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/exMessage"
+        android:layout_width="231dp"
+        android:layout_height="278dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="384dp"
+        android:shadowColor="#80CBC4"
+        android:shadowRadius="25"
+        android:text="@string/exMessage"
+        android:textColor="#1B5E20"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:fontFamily="@font/chicle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"

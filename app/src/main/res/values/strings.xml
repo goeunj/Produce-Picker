@@ -46,5 +46,6 @@
     <string name="edit_images">Edit Images</string>
     <string name="ex_text">Download cards</string>
     <string name="device">DEVICE</string>
+    <string name="exMessage">To find your downloaded cards, go to settings->storage->Internal shared storage->Other and inside the folder named "card_pics</string>
     >>>>>>> app/src/main/res/values/strings.xml
 </resources>

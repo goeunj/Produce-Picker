@@ -432,6 +432,7 @@ public class gamePage extends AppCompatActivity {
         final TextView winMessage = findViewById(R.id.winMessage);
         final TextView txtDiscard = findViewById(R.id.txtDiscard);
         final TextView txtDraw = findViewById(R.id.txtDraw);
+        final TextView exMessage = findViewById(R.id.exMessage);
 
         TableLayout discardPile = findViewById(R.id.tblDiscard);
         TableLayout userPile = findViewById(R.id.tblDraw);
@@ -445,6 +446,7 @@ public class gamePage extends AppCompatActivity {
         addButton.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.VISIBLE);
         winMessage.setVisibility(View.VISIBLE);
+        exMessage.setVisibility(View.VISIBLE);
 
         setAddButton(addButton, cancelButton, nickname, winMessage, date);
         setCancelButton(cancelButton, addButton, nickname, winMessage);
