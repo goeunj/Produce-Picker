@@ -9,12 +9,14 @@ public class option {
     private int userOrder;
     private String userLevel;
     private int userPileSize;
+    private boolean userDownload;
 
-    option(String theme, int order, String level, int size){
+    option(String theme, int order, String level, int size, boolean download){
         this.userTheme = theme;
         this.userOrder = order;
         this.userLevel = level;
         this.userPileSize = size;
+        this.userDownload = download;
     }
 
     void setUserTheme(String theme){
@@ -43,5 +45,12 @@ public class option {
     }
     int getUserPileSize(){
         return this.userPileSize;
+    }
+
+    void setUserDownload(boolean download){
+        this.userDownload = download;
+    }
+    boolean getUserDownload(){
+        return this.userDownload;
     }
 }

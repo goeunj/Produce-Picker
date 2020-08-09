@@ -23,11 +23,12 @@ import cmpt276.projectLogic.optionManager;
 
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
-    RadioGroup options, order, pileSize, difficulty;
+    RadioGroup options, order, pileSize, difficulty, downloads;
     RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrbutton;
     RadioButton easy, medium, hard;
     RadioButton order2, order3, order5, size5, size10, size15, size20, sizeAll;
-    int themeSelected, orderSelected, levelSelected, sizeSelected, sizeCompare, orderCompare;
+    RadioButton download;
+    int themeSelected, orderSelected, levelSelected, sizeSelected, sizeCompare, orderCompare, dlSelected;
     private optionManager compareManager = optionManager.getInstance();
     boolean notValid = true;
 
@@ -86,11 +87,20 @@ public class optionPage extends AppCompatActivity {
                 sizeAll = findViewById(R.id.sizeAll);
                 sizeSelected = pileSize.getCheckedRadioButtonId();
 
+                downloads = findViewById(R.id.downloads);
+                download = findViewById(R.id.dlButton);
+                dlSelected = downloads.getCheckedRadioButtonId();
+
+
                 if(themeSelected != -1 && orderSelected != -1 && levelSelected != -1 && sizeSelected != -1){
                     manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrbutton);
                     manager.setMyOrder(orderSelected);
                     manager.setMyLevel(levelSelected);
                     manager.setMySize(sizeSelected);
+
+                    if(dlSelected != -1){
+                        manager.setMyDownload(true);
+                    }
 
                     orderCompare = compareManager.getUserOrder(0);
                     sizeCompare = compareManager.getUserSize(0);

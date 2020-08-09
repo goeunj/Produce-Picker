@@ -90,7 +90,9 @@
         style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
+        android:layout_marginTop="612dp"
         android:background="#FFFDE7"
         android:text="@string/setButton"
         android:textColor="#1B5E20"
@@ -98,9 +100,9 @@
         android:textStyle="bold"
         app:fontFamily="@font/chicle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pileSize" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/order"
@@ -211,6 +213,23 @@
             android:textSize="23sp"
             android:textStyle="bold"
             app:fontFamily="@font/chicle" />
+
+        <RadioGroup
+            android:id="@+id/downloads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/dlButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FCE4EC"
+                android:text="@string/ex_text"
+                android:textColor="#1B5E20"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/chicle" />
+        </RadioGroup>
     </RadioGroup>
 
     <RadioGroup
@@ -256,6 +275,7 @@
             android:textSize="23sp"
             android:textStyle="bold"
             app:fontFamily="@font/chicle" />
+
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

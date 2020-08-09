@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
+import android.media.MediaScannerConnection;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -24,12 +30,18 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import cmpt276.music.song;
 import cmpt276.music.winSong;
@@ -57,8 +69,10 @@ public class gamePage extends AppCompatActivity {
     ArrayList<Bitmap> rotateResizeType;
     int score, count=0;
     int gameOrder, images, numCards;
-    int ImageCount , TextCount;
+    int ImageCount , TextCount, bitCount, cardCount = 1, exportCount;
     int[] myCard, discard, cards;
+    boolean exportToggle;
+    Bitmap bit1, bit2, bit3, bit4, bit5, bit6, finalBit;
     String[] Image, ImgTxt, cardType;
 
     String[] Fruit = {"apple", "apricot", "banana", "blackberry", "blueberry", "cherry", "cranberry", "dragonfruit", "durian",
@@ -234,12 +248,13 @@ public class gamePage extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void populateCard(String position) throws IOException {
         TableLayout table = null;
-        Bitmap bitmap;
+        Bitmap bitmap = null;
         ImageCount = 0;
         TextCount = 0;
 
         if (position.equals("Discard")){
             table = findViewById(R.id.tblDiscard);
+            exportToggle = true;
         }
         else if (position.equals("Draw")) {
             table = findViewById(R.id.tblDraw);
@@ -303,8 +318,63 @@ public class gamePage extends AppCompatActivity {
                     }
                 }
             });
-
             tableRow.addView(button);
+
+
+            if(bitCount == 0) {
+                bit1 = bitmap;
+            }
+            if(bitCount == 1){
+                bit2 = bitmap;
+            }
+            if(bitCount == 2){
+                bit3 = bitmap;
+            }
+            if(bitCount == 3){
+                bit4 = bitmap;
+            }
+            if(bitCount == 4){
+                bit5 = bitmap;
+            }
+            bitCount++;
+        }
+        bitCount = 0;
+
+        if(manager.getUserDownload(0)){
+            if(exportToggle) {
+                assert bit2 != null;
+                assert bit1 != null;
+                assert bitmap != null;
+                if (manager.getUserOrder(0) == 2) {
+                   bit6 = mergeBitmap(bit1, bit2);
+                   finalBit = mergeBitmap(bit6, bitmap);
+                }
+
+                if (manager.getUserOrder(0) == 3) {
+                    bit6 = mergeBitmap(bit1, bit2);
+                    bit6 = mergeBitmap(bit6, bit3);
+                    finalBit = mergeBitmap(bit6, bitmap);
+                }
+
+                if (manager.getUserOrder(0) == 5) {
+                    bit6 = mergeBitmap(bit1, bit2);
+                    bit6 = mergeBitmap(bit6, bit3);
+                    bit6 = mergeBitmap(bit6, bit4);
+                    bit6 = mergeBitmap(bit6, bit5);
+                   finalBit = mergeBitmap(bit6, bitmap);
+                }
+
+                String fileName = "Order_" + manager.getUserOrder(0) + "_Card_" + cardCount + ".jpg";
+                File picDirectory = new File(Environment.getExternalStorageDirectory().getPath() + "/card_pics/");
+                picDirectory.mkdirs();
+                File outputFile = new File(Environment.getExternalStorageDirectory().getPath() + "/card_pics/", fileName);
+                FileOutputStream fos = new FileOutputStream(outputFile);
+                finalBit.compress(Bitmap.CompressFormat.JPEG, 85, fos);
+                fos.flush();
+                fos.close();
+                cardCount++;
+                exportToggle = false;
+            }
         }
     }
 
@@ -322,6 +392,7 @@ public class gamePage extends AppCompatActivity {
             count++;
 
             if (count == numCards-1){
+                populateCard("Discard");
                 sound.load(gamePage.this, R.raw.match, 0);
                 time.stop();
                 setMessage();
@@ -415,4 +486,25 @@ public class gamePage extends AppCompatActivity {
             }
         });
     }
+
+    public Bitmap mergeBitmap(Bitmap fr, Bitmap sc){                //code from: https://stackoverflow.com/questions/14263639/how-do-i-merge-bitmap-side-by-side
+
+        Bitmap comboBitmap;
+
+        int width, height;
+
+        width = fr.getWidth() + sc.getWidth();
+        height = fr.getHeight();
+
+        comboBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas comboImage = new Canvas(comboBitmap);
+
+
+        comboImage.drawBitmap(fr, 0f, 0f, null);
+        comboImage.drawBitmap(sc, fr.getWidth(), 0f , null);
+        return comboBitmap;
+
+    }
+
 }
