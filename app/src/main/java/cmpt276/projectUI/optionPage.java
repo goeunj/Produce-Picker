@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import cmpt276.music.song;
 import cmpt276.project.R;
 import cmpt276.projectLogic.optionManager;
 
@@ -24,7 +23,7 @@ import cmpt276.projectLogic.optionManager;
 public class optionPage extends AppCompatActivity {
     private optionManager manager = optionManager.getInstance();
     RadioGroup options, order, pileSize, difficulty;
-    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrbutton;
+    RadioButton fruitButton, vegeButton, fruitImgTxt, vegImgTxt, flickrbutton, deviceButton;
     RadioButton easy, medium, hard;
     RadioButton order2, order3, order5, size5, size10, size15, size20, sizeAll;
     int themeSelected, orderSelected, levelSelected, sizeSelected, sizeCompare, orderCompare;
@@ -64,6 +63,7 @@ public class optionPage extends AppCompatActivity {
                 fruitImgTxt = findViewById(R.id.fruitImgTxt);
                 vegImgTxt = findViewById(R.id.vegImgTxt);
                 flickrbutton = findViewById(R.id.flickrButton);
+                deviceButton = findViewById(R.id.deviceButton);
                 themeSelected = options.getCheckedRadioButtonId();
 
                 order = findViewById(R.id.order);
@@ -87,7 +87,7 @@ public class optionPage extends AppCompatActivity {
                 sizeSelected = pileSize.getCheckedRadioButtonId();
 
                 if(themeSelected != -1 && orderSelected != -1 && levelSelected != -1 && sizeSelected != -1){
-                    manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrbutton);
+                    manager.setMyOption(themeSelected, fruitImgTxt, vegImgTxt, fruitButton, vegeButton, flickrbutton, deviceButton);
                     manager.setMyOrder(orderSelected);
                     manager.setMyLevel(levelSelected);
                     manager.setMySize(sizeSelected);
