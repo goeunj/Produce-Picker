@@ -8,16 +8,12 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
-import android.media.MediaScannerConnection;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -30,18 +26,14 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import cmpt276.music.song;
 import cmpt276.music.winSong;
@@ -70,7 +62,7 @@ public class gamePage extends AppCompatActivity {
     ArrayList<Bitmap> rotateResizeType;
     int score, count=0;
     int gameOrder, images, numCards;
-    int ImageCount , TextCount, bitCount, cardCount = 1, exportCount;
+    int ImageCount , TextCount, bitCount, cardCount = 1;
     int[] myCard, discard, cards;
     boolean exportToggle;
     Bitmap bit1, bit2, bit3, bit4, bit5, bit6, finalBit;
@@ -241,9 +233,9 @@ public class gamePage extends AppCompatActivity {
         return bitmap;
     }
 
-    private Bitmap reSizeBitmap(Bitmap bitmap, Bitmap original, int size){
+    private Bitmap reSizeBitmap(Bitmap bitmap, int size){
         if (manager.getUserLevel(0).equals("HARD")){
-            bitmap = Bitmap.createScaledBitmap(original, size, size, true);
+            bitmap = Bitmap.createScaledBitmap(bitmap, size, size, true);
         }
         return bitmap;
     }
@@ -308,19 +300,16 @@ public class gamePage extends AppCompatActivity {
             else if (manager.getUserTheme(0).equals("DEVICE")){
                 Bitmap originalBitmap = deviceImgs.get(myCard[i]);
                 bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
-                bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
-                bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
-                bitmap = discardPileBitmap(bitmap, position, i);
             }
             else {
                 int imgID = getResources().getIdentifier(cardType[myCard[i]], "drawable", getPackageName());
                 Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imgID);
                 bitmap = Bitmap.createScaledBitmap(originalBitmap, 400, 400, true);
-                bitmap = reSizeBitmap(bitmap, originalBitmap, GameLogic.getRandomSize());
-                bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
-
-                bitmap = discardPileBitmap(bitmap, position, i);
             }
+            bitmap = reSizeBitmap(bitmap, GameLogic.getRandomSize());
+            bitmap = rotateBitmap(bitmap, GameLogic.getRandomDegree());
+            bitmap = discardPileBitmap(bitmap, position, i);
+
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, bitmap));
             button.setTag(myCard[i]);

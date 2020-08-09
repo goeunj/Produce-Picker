@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E1F5FE"
-            android:text="DEVICE"
+            android:text="@string/device"
             android:textColor="#1B5E20"
             android:textSize="23sp"
             android:textStyle="bold"
@@ -101,9 +101,7 @@
         style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginTop="612dp"
+        android:layout_marginTop="9dp"
         android:background="#FFFDE7"
         android:text="@string/setButton"
         android:textColor="#1B5E20"
@@ -111,9 +109,9 @@
         android:textStyle="bold"
         app:fontFamily="@font/chicle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pileSize" />
 
     <RadioGroup
         android:id="@+id/order"
