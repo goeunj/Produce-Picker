@@ -19,7 +19,11 @@ import java.io.IOException;
 import cmpt276.project.R;
 
 import static cmpt276.projectDeviceImgs.GalleryArray.deviceImgs;
-
+/*
+    This will load the table with the images picked from the gallery.
+    if there are no images the edit doesn't open and tells the user to pick images.
+    click on an image to clear it from your list.
+*/
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class deviceEditPage extends AppCompatActivity {
 
