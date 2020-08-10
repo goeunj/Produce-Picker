@@ -8,5 +8,4 @@ import java.util.List;
 public class GalleryArray {
     public static List<Bitmap> deviceImgs = new ArrayList<>();
 
-
 }

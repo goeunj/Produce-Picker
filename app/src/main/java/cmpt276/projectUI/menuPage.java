@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -166,9 +167,14 @@ public class menuPage extends AppCompatActivity {
             }
         });
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED){
+            Toast.makeText(getApplicationContext(), "Click DONE in top right corner to save images", Toast.LENGTH_LONG).show();
+            return;
+        }
         int size = data.getClipData().getItemCount();
         int i;
         Bitmap bitmap = null;
@@ -183,6 +189,7 @@ public class menuPage extends AppCompatActivity {
         }
         setList(deviceImgs);
     }
+    //Bitmap/String conversions modified from https://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa/18052269
     public List<String> BitMapToString(List<Bitmap> list){
         List<String> temp = null;
         for (Bitmap bitmap : list) {
@@ -194,7 +201,6 @@ public class menuPage extends AppCompatActivity {
         }
         return temp;
     }
-
     public List<Bitmap> StringToBitMap(List<String> encodedList){
         List<Bitmap> list = null;
         for (int i = 0; i < encodedList.size(); i++) {
@@ -213,8 +219,6 @@ public class menuPage extends AppCompatActivity {
 
     public <T> void setList(List<Bitmap> list) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(list);
         Set<String> set = null;
         if (set != null) {
             set.addAll(BitMapToString(list));
@@ -235,12 +239,6 @@ public class menuPage extends AppCompatActivity {
             assert tempList != null;
             tempList.add(i);
         }
-
-//        if (name != null) {
-//            Gson gson = new Gson();
-//            Type type = new TypeToken<List<Bitmap>>(){}.getType();
-//            arrayItems = gson.fromJson(name, type);
-//        }
         assert tempList != null;
         myList = StringToBitMap(tempList);
         return myList;

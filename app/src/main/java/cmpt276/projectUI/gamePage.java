@@ -375,7 +375,8 @@ public class gamePage extends AppCompatActivity {
 
                 String fileName = "Order_" + manager.getUserOrder(0) + "_Card_" + cardCount + ".jpg";
                 File picDirectory = new File(Environment.getExternalStorageDirectory().getPath() + "/card_pics/");
-                picDirectory.mkdirs();
+                boolean num = picDirectory.mkdirs();
+                System.out.println(num);
                 File outputFile = new File(Environment.getExternalStorageDirectory().getPath() + "/card_pics/", fileName);
                 FileOutputStream fos = new FileOutputStream(outputFile);
                 finalBit.compress(Bitmap.CompressFormat.JPEG, 85, fos);
